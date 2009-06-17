@@ -8,8 +8,8 @@
     <ProjectGuid>{1414C87E-7226-4787-9091-D18C43F26B44}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WimitPortal.Common.Log</RootNamespace>
-    <AssemblyName>WimitPortal.Common.Log</AssemblyName>
+    <RootNamespace>WIT.Common.Log</RootNamespace>
+    <AssemblyName>WIT.Common.Log</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
