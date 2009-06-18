@@ -9,5 +9,6 @@ namespace WIT.Common.ServiceRunner
     {
         public static string DefaultLoggerName = "WIT.Common.ServiceRunnerLog";
         public static string ServiceFriendlyName = "WIT Service Runner";
+        public static string LocalXMLScheduledServicesConfigurationPath = "LocalXMLConfigurationFile"  ;      
     }
 }
