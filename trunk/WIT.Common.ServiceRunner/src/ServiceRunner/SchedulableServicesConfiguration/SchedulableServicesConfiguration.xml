@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SchedulableServices>
+  <SchedulableServiceInfo name="SchedulableServiceExample" assembly="SchedulableServiceExample.FileWriterExample,SchedulableServiceExample" lastExecution="6/18/2009 5:04:33 PM" executionIntervalMinutes="1" />
+</SchedulableServices>
