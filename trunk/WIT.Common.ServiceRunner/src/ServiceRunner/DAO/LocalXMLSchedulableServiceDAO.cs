@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using System.Configuration;
 
 namespace WIT.Common.ServiceRunner.DAO
 {
     public class LocalXMLSchedulableServiceDAO : ISchedulableServiceDAO
     {
         #region ISchedulableServiceDAO Members
-        private string configPath = @"C:\devel\proyectos\WIT.Common\WIT.Common.ServiceRunner\src\SchedulableServicesConfiguration\SchedulableServicesConfiguration.xml";
-        
+        private string configPath = ConfigurationManager.AppSettings[WellKnownKeys.LocalXMLScheduledServicesConfigurationPath];
         public List<SchedulableServiceInfo> GetAll()
         {
             List<SchedulableServiceInfo> resp = new List<SchedulableServiceInfo>();
