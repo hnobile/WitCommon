@@ -76,7 +76,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="WIT.Common.Log, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\WIT.Common.Log\WIT.Common.Log.dll</HintPath>
+      <HintPath>..\..\lib\WIT.Common.Log\WIT.Common.Log.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
