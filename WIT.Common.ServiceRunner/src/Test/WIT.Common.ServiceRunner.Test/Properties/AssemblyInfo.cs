@@ -2,9 +2,9 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an Assembly is controlled through the following 
+// General Information about an AssemblyName is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
-// associated with an Assembly.
+// associated with an AssemblyName.
 [assembly: AssemblyTitle("WIT.Common.ServiceRunner.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
@@ -14,15 +14,15 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// Setting ComVisible to false makes the types in this Assembly not visible 
-// to COM componenets.  If you need to access a type in this Assembly from 
+// Setting ComVisible to false makes the types in this AssemblyName not visible 
+// to COM componenets.  If you need to access a type in this AssemblyName from 
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("5dc9e891-faab-41b9-a8e2-1a873659a651")]
 
-// Version information for an Assembly consists of the following four values:
+// Version information for an AssemblyName consists of the following four values:
 //
 //      Major Version
 //      Minor Version 

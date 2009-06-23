@@ -19,7 +19,10 @@ namespace WIT.Common.ServiceRunner.DAO
             var configElements = from serviceInfo in config.Descendants("SchedulableServiceInfo")
                                  select new {
                                     Name = serviceInfo.Attribute("name").Value,
-                                    Assembly = serviceInfo.Attribute("assembly").Value,
+                                    BaseFolder = serviceInfo.Attribute("baseFolder").Value,
+                                    ConfigFileName = serviceInfo.Attribute("configFileName").Value,
+                                    AssemblyName = serviceInfo.Attribute("assemblyName").Value,
+                                    TypeName = serviceInfo.Attribute("typeName").Value,
                                     LastExecutionDate = serviceInfo.Attribute("lastExecution").Value,
                                     ExecutionInterval = serviceInfo.Attribute("executionIntervalMinutes").Value
                                  };
@@ -28,7 +31,10 @@ namespace WIT.Common.ServiceRunner.DAO
             {
                 SchedulableServiceInfo ssi = new SchedulableServiceInfo();
                 ssi.Name = si.Name;
-                ssi.Assembly = si.Assembly;
+                ssi.BaseFolder = si.BaseFolder;
+                ssi.ConfigFileName = si.ConfigFileName;
+                ssi.AssemblyName = si.AssemblyName;
+                ssi.TypeName = si.TypeName;
                 ssi.ExecutionInterval = Int64.Parse(si.ExecutionInterval);
                 if (String.IsNullOrEmpty(si.LastExecutionDate)){
                      ssi.LastExecution = null;

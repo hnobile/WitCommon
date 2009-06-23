@@ -1,19 +1,21 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
-using WIT.Common.ServiceRunner;
+using WIT.Common.ServiceRunner.Common;
 
 namespace SchedulableServiceExample
 {
-    class FileWriterExample : ISchedulableService
+    [Serializable]
+    public class FileWriterExample : SchedulableServiceBase
     {
         #region ISchedulableService Members
 
-        public void Execute()
+        public override void Execute()
         {
             TextWriter tw = new StreamWriter("C:\\Test.txt");
 
             // write a line of text to the file
-            tw.WriteLine(DateTime.Now);
+            tw.WriteLine(ConfigurationManager.AppSettings["test"]);
 
             // close the stream
             tw.Close();

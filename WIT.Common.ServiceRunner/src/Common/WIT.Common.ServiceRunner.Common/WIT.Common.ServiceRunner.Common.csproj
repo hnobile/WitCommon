@@ -48,6 +48,7 @@
     <Compile Include="ISchedulableService.cs" />
     <Compile Include="ISchedulableServiceDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchedulableServiceBase.cs" />
     <Compile Include="SchedulableServiceInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

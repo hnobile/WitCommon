@@ -11,11 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 		WIT.Common.ServiceRunner.vsmdi = WIT.Common.ServiceRunner.vsmdi
+		WIT.Common.ServiceRunner1.vsmdi = WIT.Common.ServiceRunner1.vsmdi
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchedulableServiceExample", "SchedulableServiceExample\SchedulableServiceExample\SchedulableServiceExample.csproj", "{2BD06E4F-4A40-4420-B1DB-82DD59AC55D3}"
 EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = WIT.Common.ServiceRunner1.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
