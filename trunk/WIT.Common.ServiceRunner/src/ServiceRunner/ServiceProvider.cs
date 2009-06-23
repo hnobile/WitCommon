@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using WIT.Common.ServiceRunner.DAO;
 using WIT.Common.Log;
+using WIT.Common.ServiceRunner.DAO;
 
 namespace WIT.Common.ServiceRunner
 {
@@ -25,8 +25,13 @@ namespace WIT.Common.ServiceRunner
                 if (MustExecute(s))
                 {
                     try {
-                        ISchedulableService instance = CreateServiceInstance(s.Assembly);
                         s.LastExecution = DateTime.Now;
+                        AppDomainSetup ads = new AppDomainSetup();
+                        ads.ApplicationBase = s.BaseFolder;
+                        ads.ConfigurationFile = s.ConfigFileName;
+                        AppDomain d = AppDomain.CreateDomain("WIT.ServiceRunner", null, ads);
+                        ISchedulableService instance =  (ISchedulableService)d.CreateInstanceAndUnwrap(
+                            s.AssemblyName, s.TypeName);
                         instance.Execute();
                         ServiceLog(s);
                     }
@@ -37,14 +42,6 @@ namespace WIT.Common.ServiceRunner
                     }
                 }
             }
-        }
-
-        private ISchedulableService CreateServiceInstance(string assembly)
-        {
-            Type type = Type.GetType(assembly);
-            ISchedulableService instance = (ISchedulableService)Activator.CreateInstance(type);
-            return instance;
-            
         }
 
         private bool MustExecute(SchedulableServiceInfo s)

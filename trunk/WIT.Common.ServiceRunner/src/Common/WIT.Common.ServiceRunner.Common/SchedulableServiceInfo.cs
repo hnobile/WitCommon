@@ -5,7 +5,13 @@ namespace WIT.Common.ServiceRunner
     {
         public string Name {get;set;}
 
-        public string Assembly {get;set;}
+        public string BaseFolder { get; set; }
+
+        public string ConfigFileName { get; set; }
+
+        public string AssemblyName {get;set;}
+
+        public string TypeName { get; set; }
 
         public System.Nullable<System.DateTime> LastExecution { get; set; }
 

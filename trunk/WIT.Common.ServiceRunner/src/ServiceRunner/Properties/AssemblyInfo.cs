@@ -2,9 +2,9 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an Assembly is controlled through the following 
+// General Information about an AssemblyName is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
-// associated with an Assembly.
+// associated with an AssemblyName.
 [assembly: AssemblyTitle("phm.services")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
@@ -14,15 +14,15 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// Setting ComVisible to false makes the types in this Assembly not visible 
-// to COM components.  If you need to access a type in this Assembly from 
+// Setting ComVisible to false makes the types in this AssemblyName not visible 
+// to COM components.  If you need to access a type in this AssemblyName from 
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("9cb0fda4-d161-490d-bf97-166c8a468da2")]
 
-// Version information for an Assembly consists of the following four values:
+// Version information for an AssemblyName consists of the following four values:
 //
 //      Major Version
 //      Minor Version 
@@ -31,6 +31,6 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [Assembly: AssemblyVersion("1.0.*")]
+// [AssemblyName: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
