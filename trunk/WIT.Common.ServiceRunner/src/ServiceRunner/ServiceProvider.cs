@@ -24,6 +24,7 @@ namespace WIT.Common.ServiceRunner
             {
                 if (MustExecute(s))
                 {
+                    WITLogManager.GetInstance(WellKnownKeys.DefaultLoggerName).LogInfo("Started to process service with name " + s.Name);
                     try {
                         s.LastExecution = DateTime.Now;
                         AppDomainSetup ads = new AppDomainSetup();
@@ -34,6 +35,7 @@ namespace WIT.Common.ServiceRunner
                             s.AssemblyName, s.TypeName);
                         instance.Execute();
                         ServiceLog(s);
+                        WITLogManager.GetInstance(WellKnownKeys.DefaultLoggerName).LogInfo("Finished to process service with name " + s.Name);
                     }
                     catch (Exception ex)
                     {
