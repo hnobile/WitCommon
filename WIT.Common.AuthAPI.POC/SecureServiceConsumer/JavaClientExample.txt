@@ -1,0 +1,126 @@
+package com.wormholeit.rtc.servlet;
+
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.security.SignatureException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.GetMethod;
+
+public class ConfigurationReloadServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+
+		HttpClient httpClient = new HttpClient();
+		String url = "http://localhost/WIT.API.AUTH/Service1.svc/GetData?param1=nacho+es&param2=un+lopez";
+		HttpMethod method = new GetMethod(url);
+		/*
+		 * Assumes parameters are in a java.util.Map named paramMap where the
+		 * key is the parameter name.
+		 */
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("param1", URLEncoder.encode("nacho es","utf-8"));
+		paramMap.put("param2", URLEncoder.encode("un lopez","utf-8"));
+		Set<String> sortedKeys = new TreeSet<String>(
+				String.CASE_INSENSITIVE_ORDER);
+		sortedKeys.addAll(paramMap.keySet());
+
+		StringBuilder stringBuilder = new StringBuilder();
+		for (String key : sortedKeys) {
+			if (stringBuilder.length() > 0) stringBuilder.append("&");
+			stringBuilder.append(key).append('=');
+			stringBuilder.append(paramMap.get(key));
+
+		}
+
+		System.out.println("String to sign : " + stringBuilder.toString());
+		String hmacSignature="";
+		try {
+			hmacSignature = calculateRFC2104HMAC(stringBuilder.toString(), "SUPERSECRET");
+			System.out.println ("hmac signature = " + hmacSignature);
+			
+		} catch (SignatureException e) {
+			e.printStackTrace();
+		}
+		
+		method.addRequestHeader("Authorization", hmacSignature);
+		httpClient.executeMethod(method);
+
+		byte[] response = method.getResponseBody();
+		method.releaseConnection();
+		System.out.println(new String(response));
+		
+		
+
+		/*
+		 * String externalSystemKey = req.getParameter("externalSystemKey");
+		 * 
+		 * System.out.println("INDICATING THAT THE CONFIGURATION MUST BE
+		 * RELOADED FOR " + externalSystemKey);
+		 * 
+		 * try { HashMap<String, ExternalSystem> externalSystems =
+		 * Application.context.getExternalSystems(); for (ExternalSystem es :
+		 * externalSystems.values()) { if
+		 * (es.getKey().equalsIgnoreCase(externalSystemKey)){ Boolean ret =
+		 * es.reloadConfiguration(); resp.getWriter().write(ret.toString()); } }
+		 *  } catch (InvalidExternalSystemException e) { e.printStackTrace(); }
+		 */
+	}
+
+	/**
+	 * Computes RFC 2104-compliant HMAC signature. *
+	 * 
+	 * @param data
+	 *            The data to be signed.
+	 * @param key
+	 *            The signing key.
+	 * @return The Base64-encoded RFC 2104-compliant HMAC signature.
+	 * @throws java.security.SignatureException
+	 *             when signature generation fails
+	 */
+	public static String calculateRFC2104HMAC(String data, String key)
+			throws java.security.SignatureException {
+		String result;
+		try {
+
+			// get an hmac_sha1 key from the raw key bytes
+			SecretKeySpec signingKey = new SecretKeySpec(key.getBytes(),
+					"HmacSHA1");
+
+			// get an hmac_sha1 Mac instance and initialize with the signing key
+			Mac mac = Mac.getInstance("HmacSHA1");
+			mac.init(signingKey);
+
+			// compute the hmac on input data bytes
+			byte[] rawHmac = mac.doFinal(data.getBytes());
+
+			// base64-encode the hmac
+			byte[] binaryResult = Base64.encodeBase64(rawHmac);
+			result = new String(binaryResult);
+
+		} catch (Exception e) {
+			throw new SignatureException("Failed to generate HMAC : "
+					+ e.getMessage());
+		}
+		return result;
+	}
+
+}
