@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WIT.Common.AddThisButton", "AddThisButton\WIT.Common.AddThisButton.csproj", "{3598D8DB-0DC1-4A78-AD1B-546F3CD34797}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WIT.Common.AddThis", "AddThisButton\WIT.Common.AddThis.csproj", "{3598D8DB-0DC1-4A78-AD1B-546F3CD34797}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
