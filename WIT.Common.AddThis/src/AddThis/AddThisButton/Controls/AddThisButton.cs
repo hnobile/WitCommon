@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using System.Linq;
 using System.Text;
+using System.Web.UI;
 
-namespace WIT.Common.AddThisButton.UserControls
+namespace WIT.Common.AddThis.Controls
 {
-    public partial class AddThisButton : System.Web.UI.UserControl
+    public partial class AddThisButton : System.Web.UI.Control
     {
         #region Properties
         /// <summary>
@@ -209,11 +205,33 @@ namespace WIT.Common.AddThisButton.UserControls
                 ViewState.Add(this.UniqueID + ".AddThisButtonAPI", value);
             }
         }
-
-        private bool CanBuildConfigurationAndSharingOptions { get; set; }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Renders HTML Similar to this:
+        /// <div class="addthis_toolbox addthis_default_style" 
+        ///     <%= (!string.IsNullOrEmpty(URL)? "addthis:url='" + URL + "'" : ((Request.Url != null)? "addthis:url='" + Request.Url.ToString() + "'" : string.Empty)) %>
+        ///     <%= !string.IsNullOrEmpty(Title)? "addthis:title='" + Title + "'" : string.Empty %>
+        ///     <%= !string.IsNullOrEmpty(SelectedLanguage)? "addthis:ui_language='" + SelectedLanguage + "'" : string.Empty %>>
+        ///         <%= BuildMenuServices() %>
+        ///         <%= !string.IsNullOrEmpty(Separator)? "<span class='addthis_separator'>" + Separator + "</span>" : string.Empty %>
+        ///         <a href="http://www.addthis.com/bookmark.php?v=250&pub=xa-4a60bb071de35881" class="addthis_button_expanded"><%= TextMore %></a>
+        /// </div>
+        /// </summary>
+        /// <param name="writer"></param>
+        private void BuildHtml(HtmlTextWriter writer)
+        {
+            writer.WriteLine("<div class='addthis_toolbox addthis_default_style'");
+                writer.WriteLine((!string.IsNullOrEmpty(URL) ? "addthis:url='" + URL + "'" : ((this.Page.Request.Url != null) ? "addthis:url='" + this.Page.Request.Url.ToString() + "'" : string.Empty)));
+                writer.WriteLine(!string.IsNullOrEmpty(Title) ? "addthis:title='" + Title + "'" : string.Empty);
+                writer.WriteLine(!string.IsNullOrEmpty(SelectedLanguage) ? "addthis:ui_language='" + SelectedLanguage + "'" : string.Empty + ">");
+                    writer.WriteLine(BuildMenuServices());
+                    writer.WriteLine(!string.IsNullOrEmpty(Separator) ? "<span class='addthis_separator'>" + Separator + "</span>" : string.Empty);
+                    writer.WriteLine("<a href='http://www.addthis.com/bookmark.php?v=250&pub=xa-4a60bb071de35881' class='addthis_button_expanded'>" + TextMore + "</a>");
+            writer.WriteLine("</div>");
+        }
+
         private void BuildConfigurationAndSharingOptions()
         {
             if (!this.Page.ClientScript.IsClientScriptBlockRegistered(this.Page.GetType(), "AddThisButtonConfigurationScript"))
@@ -231,18 +249,26 @@ namespace WIT.Common.AddThisButton.UserControls
                 this.Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "AddThisButtonConfigurationScript", script.ToString());
             }
         }
+
         private void RegisterAddThisButtonAPI()
         {
             if (!this.Page.ClientScript.IsClientScriptBlockRegistered(this.Page.GetType(), "AddThisButtonAPI"))
             {
                 StringBuilder script = new StringBuilder();
-                script.Append("<script type='text/javascript' src='" + AddThisButtonAPI +"'></script>");
+                script.Append("<script type='text/javascript' src='" + AddThisButtonAPI + "'></script>");
                 this.Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "AddThisButtonAPI", script.ToString());
             }
         }
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected override void Render(HtmlTextWriter writer)
         {
+            base.Render(writer);
+            BuildHtml(writer);
+        }
+
+        protected override void OnLoad(System.EventArgs e)
+        {
+            base.OnLoad(e);
             BuildConfigurationAndSharingOptions();
             RegisterAddThisButtonAPI();
         }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AddThisButton {
+namespace WIT.Common.AddThis {
     
     
     public partial class _Default {
@@ -29,7 +29,7 @@ namespace AddThisButton {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WIT.Common.AddThisButton.UserControls.AddThisButton AddThisButton1;
+        protected global::WIT.Common.AddThis.Controls.AddThisButton AddThisButton1;
         
         /// <summary>
         /// AddThisButton2 control.
@@ -38,6 +38,6 @@ namespace AddThisButton {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::WIT.Common.AddThisButton.UserControls.AddThisButton AddThisButton2;
+        protected global::WIT.Common.AddThis.Controls.AddThisButton AddThisButton2;
     }
 }
