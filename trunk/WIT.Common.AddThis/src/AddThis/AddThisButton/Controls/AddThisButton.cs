@@ -205,6 +205,44 @@ namespace WIT.Common.AddThis.Controls
                 ViewState.Add(this.UniqueID + ".AddThisButtonAPI", value);
             }
         }
+
+        public string Style
+        {
+            get
+            {
+                try
+                {
+                    return (string)ViewState[this.UniqueID + ".Style"];
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+            }
+            set
+            {
+                ViewState.Add(this.UniqueID + ".Style", value);
+            }
+        }
+
+        public string CssClass
+        {
+            get
+            {
+                try
+                {
+                    return (string)ViewState[this.UniqueID + ".CssClass"];
+                }
+                catch
+                {
+                    return string.Empty;
+                }
+            }
+            set
+            {
+                ViewState.Add(this.UniqueID + ".CssClass", value);
+            }
+        }
         #endregion
 
         #region Methods
@@ -222,13 +260,13 @@ namespace WIT.Common.AddThis.Controls
         /// <param name="writer"></param>
         private void BuildHtml(HtmlTextWriter writer)
         {
-            writer.WriteLine("<div class='addthis_toolbox addthis_default_style'");
+            writer.WriteLine("<div class='" + ((!string.IsNullOrEmpty(CssClass)) ? CssClass : "addthis_toolbox addthis_default_style") + "'" + ((!string.IsNullOrEmpty(Style)) ? "style='" + Style + "'" : string.Empty));
                 writer.WriteLine((!string.IsNullOrEmpty(URL) ? "addthis:url='" + URL + "'" : ((this.Page.Request.Url != null) ? "addthis:url='" + this.Page.Request.Url.ToString() + "'" : string.Empty)));
                 writer.WriteLine(!string.IsNullOrEmpty(Title) ? "addthis:title='" + Title + "'" : string.Empty);
-                writer.WriteLine(!string.IsNullOrEmpty(SelectedLanguage) ? "addthis:ui_language='" + SelectedLanguage + "'" : string.Empty + ">");
-                    writer.WriteLine(BuildMenuServices());
-                    writer.WriteLine(!string.IsNullOrEmpty(Separator) ? "<span class='addthis_separator'>" + Separator + "</span>" : string.Empty);
-                    writer.WriteLine("<a href='http://www.addthis.com/bookmark.php?v=250&pub=xa-4a60bb071de35881' class='addthis_button_expanded'>" + TextMore + "</a>");
+                writer.WriteLine((!string.IsNullOrEmpty(SelectedLanguage) ? "addthis:ui_language='" + SelectedLanguage + "'" : string.Empty) + ">");
+                writer.WriteLine("<table><tr>");
+                writer.WriteLine(BuildMenuServices() + (!string.IsNullOrEmpty(Separator) ? "<td><span class='addthis_separator'>" + Separator + "</span></td>" : string.Empty) + "<td><a href='http://www.addthis.com/bookmark.php?v=250&pub=xa-4a60bb071de35881' class='addthis_button_expanded'>" + TextMore + "</a></td>");
+                writer.WriteLine("</tr></table>");
             writer.WriteLine("</div>");
         }
 
@@ -281,7 +319,10 @@ namespace WIT.Common.AddThis.Controls
                 string[] menuServices = MenuServices.Split(',');
                 foreach (string service in menuServices)
                 {
-                    htmlResult += "<a class='addthis_button_" + service + "'></a>";
+                    if (!string.IsNullOrEmpty(service))
+                    {
+                        htmlResult += "<td><a class='addthis_button_" + service + "'></a></td>";
+                    }
                 }
                 return htmlResult;
             }
