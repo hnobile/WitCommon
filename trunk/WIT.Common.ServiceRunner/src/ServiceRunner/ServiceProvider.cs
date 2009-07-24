@@ -25,22 +25,28 @@ namespace WIT.Common.ServiceRunner
                 if (MustExecute(s))
                 {
                     WITLogManager.GetInstance(WellKnownKeys.DefaultLoggerName).LogInfo("Started to process service with name " + s.Name);
-                    try {
+                    AppDomain d = null;
+                    try
+                    {
                         s.LastExecution = DateTime.Now;
                         AppDomainSetup ads = new AppDomainSetup();
                         ads.ApplicationBase = s.BaseFolder;
                         ads.ConfigurationFile = s.ConfigFileName;
-                        AppDomain d = AppDomain.CreateDomain("WIT.ServiceRunner", null, ads);
-                        ISchedulableService instance =  (ISchedulableService)d.CreateInstanceAndUnwrap(
+                        d = AppDomain.CreateDomain("WIT.ServiceRunner", null, ads);
+                        ISchedulableService instance = (ISchedulableService)d.CreateInstanceAndUnwrap(
                             s.AssemblyName, s.TypeName);
                         instance.Execute();
                         ServiceLog(s);
+                       
                         WITLogManager.GetInstance(WellKnownKeys.DefaultLoggerName).LogInfo("Finished to process service with name " + s.Name);
                     }
                     catch (Exception ex)
                     {
                         WITLogManager logManager = WITLogManager.GetInstance(WellKnownKeys.DefaultLoggerName);
                         string error = logManager.LogError(ex.Message, ex);
+                    }
+                    finally {
+                        AppDomain.Unload(d);
                     }
                 }
             }
