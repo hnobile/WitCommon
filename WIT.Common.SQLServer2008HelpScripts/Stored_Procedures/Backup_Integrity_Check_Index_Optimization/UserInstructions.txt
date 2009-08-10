@@ -1,0 +1,48 @@
+# Dynamic selection of databases, e.g. USER_DATABASES.
+
+# Database state check. If a database is not online the procedure logs the database state and continues to the next database.
+
+# Robust error handling and logging. If an error occurs the procedure logs the error and continues to the next database or index. 
+In the end the job reports failure. Information about all commands are logged with start time, command text, command output and end time.
+
+# Database backup features. Full, differential and transaction log backups. Automatic creation of backup directories. 
+Backup file names with the name of the instance, the name of the database, backup type, date and time. Verification of backups. Deletion of old backup files.
+
+!!IMPORTANT:
+ALL STORED PROCEDURES MUST BE CREATED AND EXECUTED IN MASTER.
+
+-- ALL DATABASES ON THE SYSTEM --
+EXECUTE dbo.DatabaseBackup
+@Databases = 'USER_DATABASES',
+@Directory = 'C:\Backup', --This Directory Must Exist
+@BackupType = 'FULL',
+@Verify = 'Y',
+@CleanupTime = 24
+
+-- ONE DATABASE OF THE SYSTEM --
+EXECUTE dbo.DatabaseBackup
+@Databases = 'Example_DataBase_Name',
+@Directory = 'C:\Backup', --This Directory Must Exist
+@BackupType = 'FULL',
+@Verify = 'Y',
+@CleanupTime = 24
+
+# Database integrity check features.
+-- ALL DATABASES ON THE SYSTEM --
+EXECUTE dbo.DatabaseIntegrityCheck
+@Databases = 'USER_DATABASES'
+
+# Dynamic index optimization. Rebuild indexes online or offline, reorganize indexes, update statistics, 
+reorganize indexes and update statistics or do nothing based on fragmentation level and lob existence.
+-- ALL DATABASES ON THE SYSTEM --
+EXECUTE dbo.IndexOptimize
+@Databases = 'USER_DATABASES',
+@FragmentationHigh_LOB = 'INDEX_REBUILD_OFFLINE',
+@FragmentationHigh_NonLOB = 'INDEX_REBUILD_ONLINE',
+@FragmentationMedium_LOB = 'INDEX_REORGANIZE',
+@FragmentationMedium_NonLOB = 'INDEX_REORGANIZE',
+@FragmentationLow_LOB = 'NOTHING',
+@FragmentationLow_NonLOB = 'NOTHING',
+@FragmentationLevel1 = 5,
+@FragmentationLevel2 = 30,
+@PageCountLevel = 1000
