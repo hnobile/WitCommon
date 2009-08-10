@@ -1,0 +1,735 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+<title>SQL Server 2005 and 2008 - Backup, Integrity Check and Index Optimization - Documentation</title>
+
+<link rel="StyleSheet" href="Documentation_files/style.css" type="text/css">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="Description" content="">
+<meta name="Keywords" content="">
+
+</head><body>
+
+<div id="content">
+<table class="columns" width="100%" border="0" cellpadding="0" cellspacing="0">
+
+
+<tbody><tr>
+<td class="header" colspan="3" align="center">
+
+<table class="blogHeader" width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr>
+
+
+<td class="blogHeaderLeft">
+
+
+<div class="component">
+<div class="componentBlogname">
+<a href="http://ola.hallengren.com/">blog.ola.hallengren.com</a></div>
+</div>
+
+
+</td>
+
+
+
+
+
+<td class="blogHeaderRight">
+
+
+<div class="componentText"><span class="componentHomeLink"><a href="http://ola.hallengren.com/">Home</a></span></div>
+
+
+
+
+
+
+
+
+</td>
+
+</tr></tbody></table>
+
+</td>
+<!-- END HEADER -->
+
+</tr>
+ <!-- has_header -->
+
+<tr>
+<!-- START CENTER COL -->
+<td class="center">
+<div id="centercol">
+
+
+
+
+
+ <!-- if article.access_denied -->
+
+<div id="message_display" class="message" style="display: none;"></div>
+
+
+
+ <!-- if category_breadcrumbs -->
+
+<!-- recently updated photo albums -->
+
+
+
+ <!-- recent_albums -->
+
+
+
+
+
+<div class="dayArticles">
+
+
+<div class="categoryBreadcrumb"><a href="http://ola.hallengren.com/">Main Page</a></div>
+
+      <div class="article">
+      <div class="articleTitle"><a><img alt="" src="Documentation_files/page.gif" width="13" border="0" height="13"></a>&nbsp; SQL Server 2005 and 2008 - Backup, Integrity Check and Index Optimization - Documentation</div>
+
+     <div class="articleBody">
+
+<div class="commentTitle"><br>Database Backup</div><br>
+
+Procedure name: <a href="http://ola.hallengren.com/scripts/DatabaseBackup.sql">DatabaseBackup</a><br><br>
+
+Purpose: Create backup directories, backup databases, verify backups and delete old backups.<br><br>
+
+Parameters: See table below.<br><br>
+
+<table width="80%" border="1" cellpadding="2" cellspacing="0">
+ 
+ <tbody><tr>
+  <td valign="top">Name</td>
+  <td valign="top">Description</td>
+  <td valign="top">Supported Values</td>
+ </tr>
+ 
+ <tr>
+ 	<td valign="top">Databases</td>
+  <td valign="top">Selection of databases.</td>
+  <td valign="top">E.g. SYSTEM_DATABASES<br>
+  E.g. USER_DATABASES<br>
+  E.g. Database1<br>
+  E.g. Database1, Database2<br>
+  E.g. USER_DATABASES, master<br>
+  <nobr>E.g. SYSTEM_DATABASES, -master</nobr><br>
+  E.g. %Database%<br>
+  E.g. %Database%, -Database1<br>
+  </td>
+ </tr>
+ 
+ <tr>
+  <td valign="top">Directory</td>
+  <td valign="top">Backup root directory.</td>
+  <td valign="top">NULL (DEFAULT)<br>E.g. C:\Backup</td>
+ </tr>
+ 
+ <tr> 	
+  <td valign="top">BackupType</td>
+  <td valign="top">Type of backup.</td>
+  <td valign="top">FULL<br>
+  DIFF<br>
+  LOG</td>
+  </tr>
+ <tr>
+  <td valign="top">Verify</td>
+  <td valign="top">Is the backup to be verified?</td>
+  <td valign="top">Y<br>N (DEFAULT)</td>
+ </tr>
+ <tr>
+  <td valign="top">CleanupTime</td>
+  <td valign="top">Time in hours after which the backup files are deleted. If not specified no backup files are deleted.</td>
+  <td valign="top">NULL (DEFAULT)<br>E.g. 24</td>
+ </tr>
+ <tr>
+  <td valign="top">Compress</td>
+  <td valign="top">Is the backup to be compressed?</td>
+  <td valign="top">Y *<br>N (DEFAULT)</td>
+ </tr>
+  <tr>
+  <td valign="top">CopyOnly</td>
+  <td valign="top">Perform a copy-only backup.</td>
+  <td valign="top">Y<br>N (DEFAULT)</td>
+ </tr>
+  <tr>
+  <td valign="top">ChangeBackupType</td>
+  <td valign="top">Change backup type if a differential or transaction log backup cannot be performed.</td>
+  <td valign="top">Y<br>N (DEFAULT)</td>
+ </tr>
+  <tr>
+  <td valign="top">BackupSoftware</td>
+  <td valign="top">Third party backup software. If not specified sql server native backup is performed.</td>
+  <td valign="top">NULL (DEFAULT)<br>LITESPEED</td>
+ </tr>
+   <tr>
+  <td valign="top">CheckSum</td>
+  <td valign="top">Enable backup checksums.</td>
+  <td valign="top">Y<br>N (DEFAULT)</td>
+ </tr>
+  <tr>
+  <td valign="top">Execute</td>
+  <td valign="top">Execution of commands. Default the commands are executed normally. If set to N the commands are only printed.</td>
+  <td valign="top">Y (DEFAULT)<br>N</td>
+ </tr>
+  </tbody></table>
+<br>
+
+* Backup compression is only supported in SQL Server 2008 Enterprise and Developer Edition.<br>
+
+<div class="commentTitle"><br>Integrity Check</div><br>
+
+Procedure name: <a href="http://ola.hallengren.com/scripts/DatabaseIntegrityCheck.sql">DatabaseIntegrityCheck</a><br><br>
+
+Purpose: Check the integrity of databases.<br><br>
+
+Parameters: See table below.<br><br>
+
+<table width="80%" border="1" cellpadding="2" cellspacing="0">
+ 
+ <tbody><tr>
+  <td valign="top">Name</td>
+  <td valign="top">Description</td>
+  <td valign="top">Supported Values</td>
+ </tr>
+ <tr>
+  <td valign="top">Databases</td>
+  <td valign="top">Selection of databases.</td>
+  <td valign="top">E.g. SYSTEM_DATABASES<br>
+  E.g. USER_DATABASES<br>
+  E.g. Database1<br>
+  E.g. Database1, Database2<br>
+  E.g. USER_DATABASES, master<br>
+  <nobr>E.g. SYSTEM_DATABASES, -master</nobr><br>
+  E.g. %Database%<br>
+  E.g. %Database%, -Database1<br>
+  </td>
+ </tr>
+   <tr>
+  <td valign="top">PhysicalOnly</td>
+  <td valign="top">Limit the checks to the physical structures of the database.</td>
+  <td valign="top">Y<br>N (DEFAULT)</td>
+ </tr>
+    <tr>
+  <td valign="top">NoIndex</td>
+  <td valign="top">Nonclustered indexes are not checked.</td>
+  <td valign="top">Y<br>N (DEFAULT)</td>
+ </tr>
+     <tr>
+  <td valign="top">ExtendedLogicalChecks</td>
+  <td valign="top">Perform extended logical checks.</td>
+  <td valign="top">Y<br>N (DEFAULT)</td>
+ </tr>
+   <tr>
+  <td valign="top">Execute</td>
+  <td valign="top">Execution of commands. Default the commands are executed normally. If set to N the commands are only printed.</td>
+  <td valign="top">Y (DEFAULT)<br>N</td>
+ </tr> 
+</tbody></table>
+<br>
+
+<div class="commentTitle"><br>Index Optimization</div><br>
+
+Procedure name: <a href="http://ola.hallengren.com/scripts/IndexOptimize.sql">IndexOptimize</a><br><br>
+
+Purpose: Rebuild and reorganize indexes and update statistics.<br><br>
+
+Parameters: See table below.<br><br>
+
+<table width="80%" border="1" cellpadding="2" cellspacing="0">
+ 
+ <tbody><tr>
+  <td valign="top">Name</td>
+  <td valign="top">Description</td>
+  <td valign="top">Supported Values</td>
+ </tr>
+ 
+ <tr>
+ 	<td valign="top">Databases</td>
+  <td valign="top">Selection of databases.</td>
+  <td valign="top">E.g. SYSTEM_DATABASES<br>
+  E.g. USER_DATABASES<br>
+  E.g. Database1<br>
+  E.g. Database1, Database2<br>
+  E.g. USER_DATABASES, master<br>
+  <nobr>E.g. SYSTEM_DATABASES, -master</nobr><br>
+  E.g. %Database%<br>
+  E.g. %Database%, -Database1<br>
+  </td>
+ </tr>
+ 
+ <tr>
+  <td valign="top">FragmentationHigh_LOB</td>
+  <td valign="top">Action to be performed on a high fragmented index that does contain a LOB.</td>
+  <td valign="top">INDEX_REBUILD_OFFLINE&nbsp;(DEFAULT)<br>
+  INDEX_REORGANIZE<br>
+  STATISTICS_UPDATE<br>
+  INDEX_REORGANIZE_STATISTICS_UPDATE<br>
+  NOTHING</td>
+ </tr>
+ 
+ <tr>
+  <td valign="top">FragmentationHigh_NonLOB</td>
+  <td valign="top">Action to be performed on a high fragmented index that does not contain a LOB.</td>
+  <td valign="top">INDEX_REBUILD_ONLINE *<br>
+  INDEX_REBUILD_OFFLINE&nbsp;(DEFAULT)<br>
+  INDEX_REORGANIZE<br>
+  STATISTICS_UPDATE<br>
+  INDEX_REORGANIZE_STATISTICS_UPDATE<br>
+  NOTHING</td>
+ </tr>
+ 
+ <tr>
+ 	<td valign="top">FragmentationMedium_LOB</td>
+ 	<td valign="top">Action to be performed on a medium fragmented index that does contain a LOB.</td>
+  <td valign="top">INDEX_REBUILD_OFFLINE<br>
+  INDEX_REORGANIZE&nbsp; (DEFAULT)<br>
+  STATISTICS_UPDATE<br>
+  INDEX_REORGANIZE_STATISTICS_UPDATE<br>
+  NOTHING</td>
+ </tr>
+ 
+ <tr>
+ 	<td valign="top">FragmentationMedium_NonLOB</td>
+  <td valign="top">Action to be performed on a medium fragmented index that does not contain a LOB.</td>
+  <td valign="top">INDEX_REBUILD_ONLINE *<br>
+  INDEX_REBUILD_OFFLINE<br>
+  INDEX_REORGANIZE (DEFAULT)<br>
+  STATISTICS_UPDATE<br>
+  INDEX_REORGANIZE_STATISTICS_UPDATE<br>
+  NOTHING</td>
+ </tr>
+ 
+ <tr>
+  <td valign="top">FragmentationLow_LOB</td>
+  <td valign="top">Action to be performed on a low fragmented index that does contain a LOB.</td>
+  <td valign="top">INDEX_REBUILD_OFFLINE<br>
+  INDEX_REORGANIZE<br>
+  STATISTICS_UPDATE<br>
+  INDEX_REORGANIZE_STATISTICS_UPDATE<br>
+  NOTHING (DEFAULT)</td>
+ </tr>
+ 
+ <tr>
+  <td valign="top">FragmentationLow_NonLOB</td>
+  <td valign="top">Action to be performed on a low fragmented index that does not contain a LOB.</td>
+  <td valign="top">INDEX_REBUILD_ONLINE *<br>
+  INDEX_REBUILD_OFFLINE<br>
+  INDEX_REORGANIZE<br>
+  STATISTICS_UPDATE<br>
+  INDEX_REORGANIZE_STATISTICS_UPDATE<br>
+  NOTHING (DEFAULT)</td>
+ </tr>
+ 
+ <tr>
+ 	<td valign="top">FragmentationLevel1</td>
+  <td valign="top">The lower limit in percent for medium fragmentation.</td>
+  <td valign="top">E.g. 5 (DEFAULT)</td>
+ </tr>
+ 
+ <tr>
+  <td valign="top">FragmentationLevel2</td>
+  <td valign="top">The lower limit in percent for high fragmentation.</td>
+  <td valign="top">E.g. 30 (DEFAULT)</td>
+ </tr>
+ 
+ <tr>
+ 	<td valign="top">PageCountLevel</td>
+  <td valign="top">Indexes under this size in pages are considered to be low fragmented regardless of actual fragmentation level.</td>
+  <td valign="top">E.g. 1000 (DEFAULT)</td>
+ </tr>
+ 
+ <tr>
+ 	<td valign="top">SortInTempdb</td>
+  <td valign="top">Use tempdb for sort operations when rebuilding indexes.</td>
+  <td valign="top">Y<br>N (DEFAULT)</td>
+ </tr>
+ 
+  <tr>
+ 	<td valign="top">MaxDOP</td>
+  <td valign="top">The number of CPUs that are used when rebuilding indexes. If not specified the global max degree of parallelism is used.</td>
+  <td valign="top">NULL (DEFAULT)<br>0 - 64</td>
+ </tr>
+ 
+  <tr>
+ 	<td valign="top">FillFactor</td>
+  <td valign="top">Percentage
+that indicates how full the pages should be made when rebuilding
+indexes. If not specified the fillfactor in sys.indexes is used.</td>
+  <td valign="top">NULL (DEFAULT)<br>1 - 100</td>
+ </tr>
+ 
+  <tr>
+ 	<td valign="top">LOBCompaction</td>
+  <td valign="top">Should pages that contain LOB columns be compacted when reorganizing indexes?</td>
+  <td valign="top">Y (DEFAULT)<br>N</td>
+ </tr>
+ 
+  <tr>
+ 	<td valign="top">StatisticsSample</td>
+  <td valign="top">Percentage
+that indicates how much of a table that is gathered when updating
+statistics. If not specified SQL Server automatically computes the
+required sample.</td>
+  <td valign="top">NULL (DEFAULT)<br>1 - 100</td>
+ </tr>
+ 
+  <tr>
+ 	<td valign="top">PartitionLevel</td>
+  <td valign="top">Optimize partitioned indexes on the partition level.</td>
+  <td valign="top">Y *<br>N (DEFAULT)</td>
+ </tr>
+
+  <tr>
+ 	<td valign="top">TimeLimit</td>
+  <td valign="top">Time in seconds after which no commands are executed.</td>
+  <td valign="top">NULL (DEFAULT)<br>E.g. 3600</td>
+ </tr>
+
+   <tr>
+  <td valign="top">Execute</td>
+  <td valign="top">Execution of commands. Default the commands are executed normally. If set to N the commands are only printed.</td>
+  <td valign="top">Y (DEFAULT)<br>N</td>
+ </tr>
+ 
+</tbody></table>
+
+<br>
+
+* Online rebuild is only supported in Enterprise and Developer Edition.<br><br>
+
+* Table partitioning is only supported in Enterprise and Developer Edition.
+
+<div class="commentTitle"><br>Setup</div><br>
+
+To use the solution for backup you need the objects <a href="http://ola.hallengren.com/scripts/DatabaseBackup.sql">DatabaseBackup</a>, <a href="http://ola.hallengren.com/scripts/CommandExecute.sql">CommandExecute</a> and <a href="http://ola.hallengren.com/scripts/DatabaseSelect.sql">DatabaseSelect</a>,<br>
+to use it for integrity check you need <a href="http://ola.hallengren.com/scripts/DatabaseIntegrityCheck.sql">DatabaseIntegrityCheck</a>, <a href="http://ola.hallengren.com/scripts/CommandExecute.sql">CommandExecute</a> and <a href="http://ola.hallengren.com/scripts/DatabaseSelect.sql">DatabaseSelect</a><br>
+and to use it for index optimization you need <a href="http://ola.hallengren.com/scripts/IndexOptimize.sql">IndexOptimize</a>, <a href="http://ola.hallengren.com/scripts/CommandExecute.sql">CommandExecute</a> and <a href="http://ola.hallengren.com/scripts/DatabaseSelect.sql">DatabaseSelect</a>.<br><br>
+
+Execute the stored procedures from SQL Server Agent Jobs, through sqlcmd.
+
+<br><br>
+E.g. sqlcmd -E -S $(ESCAPE_SQUOTE(SRVR)) -d master -Q "EXECUTE
+[dbo].[DatabaseIntegrityCheck] @Databases = 'SYSTEM_DATABASES'" -b
+<br><br>
+
+Use SQL Server Agent Job Output files with <a href="http://msdn.microsoft.com/en-us/library/ms175575.aspx" target="blanc">tokens</a> for the logging.
+
+<br><br>
+
+C:\Program Files\Microsoft SQL Server\MSSQL.1\MSSQL\LOG\SQLAGENT_JOB<br>
+_$(ESCAPE_SQUOTE(JOBID))_$(ESCAPE_SQUOTE(STEPID))_$(ESCAPE_SQUOTE(STRTDT))_$(ESCAPE_SQUOTE(STRTTM)).txt
+
+<br><br>
+
+The solution is supported on SQL Server 2005 and SQL Server 2008.
+
+<br><br>
+
+Download and install the solution in one <a href="http://ola.hallengren.com/scripts/MaintenanceSolution.sql">script</a>.<br>
+
+<div class="commentTitle"><br>Error Scenarios</div><br>
+
+<table width="80%" border="1" cellpadding="2" cellspacing="0">
+ 
+ <tbody><tr>
+  <td valign="top">
+  Description
+  </td>
+  <td valign="top">
+  Applies to
+  </td>
+  <td valign="top">
+  Behavior
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  A database command fails.
+  
+  </td>
+  <td valign="top">
+  DatabaseBackup
+  DatabaseIntegrityCheck
+  
+  </td>
+  <td valign="top">
+  The procedure logs the error and continues to the next
+  database. In the end the job reports failure.
+  
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  An index command fails.
+  </td>
+  <td valign="top">
+  IndexOptimize
+  
+  </td>
+  <td valign="top">
+  The procedure logs the error and continues to the next
+  index. In the end the job reports failure.
+  
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  A backup command fails.
+  </td>
+  <td valign="top">
+  DatabaseBackup
+  
+  </td>
+  <td valign="top">
+  The procedure skips the verify backup and delete backup
+  steps for that database. The procedure then continues to the next database. In
+  the end the job reports failure.
+  
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  A verify backup command fails.
+  </td>
+  <td valign="top">
+  DatabaseBackup
+  </td>
+  <td valign="top">
+  The procedure skips the delete backup step for that
+  database. The procedure continues to the next database. In the end the job
+  reports failure.
+  
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  A table is locked and the index command therefore cannot
+  be performed.
+  
+  </td>
+  <td valign="top">
+  IndexOptimize
+  
+  </td>
+  <td valign="top">
+  When the index command has been waiting on locks for one hour
+  it logs an error and the procedure continues to the next index. In the end
+  the job reports failure.
+  
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  A database is not in an Online state.
+  
+  </td>
+  <td valign="top">
+  DatabaseBackup
+  DatabaseIntegrityCheck
+  IndexOptimize
+  
+  </td>
+  <td valign="top">
+  The procedure logs that the database is not Online and
+  continues to the next database. In the end the job reports success.
+  
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  A table or index is dropped or altered after the job has
+  started.
+  
+  </td>
+  <td valign="top">
+  IndexOptimize
+  
+  </td>
+  <td valign="top">
+  A final check is performed just before starting an index
+  command. If the index has been dropped or altered the procedure skips the
+  index and continues to the next index. In the end the job reports success.
+  
+  </td>
+ </tr>
+ <tr>
+  <td valign="top">
+  A backup file is locked and cannot be deleted.
+  
+  </td>
+  <td valign="top">
+  DatabaseBackup
+  </td>
+  <td valign="top">
+  The file is skipped with no waiting. In the end the job
+  reports success. This is the behavior of the extended stored procedure xp_delete_file
+  and cannot be changed.
+  
+  </td>
+ </tr>
+</tbody></table>
+
+<a name="Faq"></a>
+<div class="commentTitle"><br>Frequently Asked Questions</div><br>
+
+<table width="80%" border="1" cellpadding="2" cellspacing="0">
+ 
+ <tbody><tr>
+  <td valign="top" width="50%">
+  Question
+  </td>
+  <td valign="top" width="50%">
+  Answer
+  </td>
+ </tr>
+ 
+  <tr>
+ <td valign="top" width="50%">
+  I'm getting this error message when I try to create the objects.<br><br>
+"Msg 102, Level 15, State 1, Procedure IndexOptimize, Line 354"<br>
+"Incorrect syntax near '('."
+  </td>
+  <td valign="top" width="50%">This
+error is because of that the database that you are creating the objects
+in, is not in compatibility level 90 or 100. Change the compatibility
+level to 90 or 100 and try again.<br><br>
+EXECUTE dbo.sp_dbcmptlevel @dbname=N'DatabaseName', @new_cmptlevel=90
+ </td>
+ </tr>
+ 
+   <tr>
+ <td valign="top" width="50%">
+  Does all databases have to be in compatibility level 90 or 100?
+  </td>
+  <td valign="top" width="50%">
+It is only the database that you are creating the objects in, that has
+to be in compatibility level 90 or 100. All other databases can be in
+any compatibility level. </td>
+ </tr>
+ 
+ <tr>
+ <td valign="top" width="50%"> I'm getting
+this informational message when I create the stored procedure
+DatabaseBackup, DatabaseIntegrityCheck or IndexOptimize.<br><br>
+"Cannot add rows to sys.sql_dependencies for the stored procedure
+because it depends on the missing table 'dbo.CommandExecute'. The
+stored procedure will still be created; however, it cannot be
+successfully executed until the table exists." </td>
+  <td valign="top" width="50%">
+  	DatabaseBackup, DatabaseIntegrityCheck and IndexOptimize are using the stored procedure <a href="http://ola.hallengren.com/scripts/CommandExecute.sql">CommandExecute</a> and the function <a href="http://ola.hallengren.com/scripts/DatabaseSelect.sql">DatabaseSelect</a>.	Download these objects and create them in the same database.<br><br>
+You could also use the script <a href="http://ola.hallengren.com/scripts/MaintenanceSolution.sql">MaintenanceSolution.sql</a>. This script contains all the objects that you need.
+   </td>
+ </tr>
+ 
+        <tr>
+ <td valign="top" width="50%">
+I'm getting these error messages or similar when I execute the stored
+procedure DatabaseBackup, DatabaseIntegrityCheck or IndexOptimize.<br><br>
+"Msg 208, Level 16, State 1, Procedure DatabaseBackup, Line 100"<br>
+"Invalid object name 'dbo.DatabaseSelect'."<br><br>
+"Msg 2812, Level 16, State 62, Procedure DatabaseBackup, Line 278"<br>
+"Could not find stored procedure 'dbo.CommandExecute'."
+
+  </td>
+  <td valign="top" width="50%">
+  	DatabaseBackup, DatabaseIntegrityCheck and IndexOptimize are using the stored procedure <a href="http://ola.hallengren.com/scripts/CommandExecute.sql">CommandExecute</a> and the function <a href="http://ola.hallengren.com/scripts/DatabaseSelect.sql">DatabaseSelect</a>.	Download these objects and create them in the same database.<br><br>
+You could also use the script <a href="http://ola.hallengren.com/scripts/MaintenanceSolution.sql">MaintenanceSolution.sql</a>. This script contains all the objects that you need.
+   </td>
+ </tr>
+ 
+     <tr>
+ <td valign="top" width="50%">
+  Does the stored procedures have to be executed in a CmdExec job step with sqlcmd? Can I not use a T-SQL job step?
+  </td>
+  <td valign="top" width="50%">
+The stored procedures have to be executed in a CmdExec job step with
+sqlcmd and the -b parameter. Otherwise the error handling and logging
+will not work as designed.<br><br>
+
+You could use the script <a href="http://ola.hallengren.com/scripts/MaintenanceSolution.sql">MaintenanceSolution.sql</a> to see how the jobs could be created.  
+ </td>
+ </tr>
+ 
+         <tr>
+ <td valign="top" width="50%">
+Can the solution be used with SQL Server Express?
+  </td>
+  <td valign="top" width="50%">
+The solution is supported on SQL Server Express. As SQL Server Express
+has no SQL Server Agent, the jobs have to be scheduled using cmd -
+files and Windows Scheduled Tasks instead.<br><br>
+
+Examples of how the cmd - files can be created are available <a href="http://code.msdn.microsoft.com/SQLExamples/Wiki/View.aspx?title=ExpressMaintenance" target="blanc">here</a>.
+   </td>
+ </tr>
+ 
+         <tr>
+ <td valign="top" width="50%">
+I'm using an old version of the solution. How do I upgrade to the latest version?
+  </td>
+  <td valign="top" width="50%">
+The easiest way to upgrade to the latest version is to use the script <a href="http://ola.hallengren.com/scripts/MaintenanceSolution.sql">MaintenanceSolution.sql</a>.
+<br><br>
+This script will drop and recreate all the objects in the solution.
+<br><br>
+It will not drop or change any jobs. All your existing jobs will
+continue to work unchanged as all the objects are backward compatible. </td>
+ </tr>
+ 
+           <tr>
+ <td valign="top" width="50%">
+What should the fragmentation levels be for reorganization and rebuild of indexes?
+  </td>
+  <td valign="top" width="50%">
+Microsoft has some recommendations in <a href="http://technet.microsoft.com/en-us/library/ms189858.aspx" target="blanc">Books Online</a>.<br><br>The default values in IndexOptimize are based on this.
+   </td>
+ </tr>
+ 
+          <tr>
+ <td valign="top" width="50%">
+Some of my indexes are still fragmented after I have just executed IndexOptimize. How could that be?
+  </td>
+  <td valign="top" width="50%">
+Very small indexes sometimes shows a high fragmentation even if they've just been rebuilt or reorganized.<br><br>
+
+In addition fragmentation on very small tables has no impact on performance. <a href="http://technet.microsoft.com/sv-se/library/cc966523%28en-us%29.aspx" target="blanc">Microsoft</a> has a whitepaper about this.<br><br>
+"Generally, you should not be concerned with fragmentation levels of
+indexes with less than 1,000 pages. In the tests, indexes containing
+more than 10,000 pages realized performance gains, with the biggest
+gains on indexes with significantly more pages (greater than 50,000
+pages)." </td>
+ </tr>
+ 
+ 
+</tbody></table>
+
+</div> <!-- articleBody -->
+
+</div> <!-- article -->
+
+ <!-- articles -->
+</div> <!-- dayArticles -->
+ <!-- days -->
+
+</div> <!-- centercol -->
+</td>
+<!-- END CENTER COL -->
+
+</tr>
+
+ <!-- has_footer -->
+
+</tbody></table>
+
+</div> <!-- content -->
+
+</body></html>

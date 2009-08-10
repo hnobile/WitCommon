@@ -1,0 +1,1056 @@
+body, html {
+    height: 100%;
+}
+
+form {
+    margin: 0;
+    padding:0;
+}
+
+textarea {
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+    border: 1px solid #999;  
+    color: #333333;
+    background-color: #FFF;
+}
+
+input {
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+    border-top: 1px solid #336699;  
+    border-bottom: 1px solid #999;  
+    border-left: 1px solid #336699;  
+    border-right: 1px solid #999;  
+    color: #333;
+    background-color: #FFF;
+    padding: 1px 1px 1px 1px;
+}
+
+select {
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+    border: 1px solid #333;  
+}
+
+input.checkbox  {
+    border: none ! important;
+    background-color: transparent;
+}
+
+input.radio  {
+    border: none ! important;
+    background-color: transparent;
+}
+
+img {
+    border: none;
+}
+
+/*** core ***/
+
+body {
+    margin: 0;
+    color: #333;
+    background-color: #FFF;
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+}
+
+table {
+    background-color: transparent;
+    color: #333;
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+}
+
+a {
+    text-decoration: underline;
+    color: #666;
+    background-color: transparent;
+}
+
+a:link, a:visited, a:active {
+    background-color: transparent;
+    color: #3366CC;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+a:focus {
+    outline: thin dotted invert;
+}
+
+a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+    background-color: transparent;
+    color: #FF0000;
+}
+
+a.plain {
+    text-decoration: none;
+}
+
+textarea {
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+}
+
+input {
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+    cursor: pointer;
+}
+
+select {
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+}
+
+input.buttonWhite {
+    background-color: #DEDEDE;
+    color: #333;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #ccc #999 #999 #ccc;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 0 3px;
+}
+
+input.button {
+    background-color: #DEDEDE;
+    color: #333;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #999 #333 #333 #999;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 0 3px;
+}
+
+/***  structural  ***/
+
+table.columns {
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+table.columns td.left {
+    vertical-align: top;
+    width: 20%;
+    height: 100%;
+    padding: 20px 15px 15px 12px;
+    border-collapse: collapse;
+}
+
+table.columns td.center {
+    padding: 20px 0 0 0;
+    vertical-align: top;
+    height: 100%;
+    min-width: 340px;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 0 0 0 1px;
+    border-collapse: collapse;
+}
+
+table.columns td.header {
+    background-color: #0F4275;
+    padding: 20px 15px 8px 15px;
+    border-color: #336699;
+    border-style: solid;
+    border-width: 0 0 5px 0;
+}
+
+table.columns td.right {
+    vertical-align: top;
+    width: 20%;
+    padding: 20px 12px 15px 15px;
+    height: 100%;
+    background-color: #000;
+    border-collapse: collapse;
+}
+
+table.columns td.footer {
+    padding: 4px 10px 6px 10px;
+    font: normal 11px verdana,arial,geneva,sans-serif;
+    text-align: center;
+    background-color: #0F4275;
+    color: #FFF;
+    border-color: #336699;
+    border-style: solid;
+    border-width: 1px 0 0 0;
+}
+
+table.blogHeader {
+    padding: 0;
+    color: #FFF;
+}
+
+table.blogHeader a:link,
+table.blogHeader a:active, 
+table.blogHeader a:visited {
+    font-weight: bold;
+    color: #99CCFF;
+    text-decoration: none;
+}
+
+table.blogHeader a:hover {
+    text-decoration: none;
+    color: #FFF;
+}
+
+table.blogHeader td.blogHeaderLeft {
+    margin: 0;
+    vertical-align: bottom;
+    text-align: left;
+}
+
+table.blogHeader td.blogHeaderCenter {
+    vertical-align: bottom;
+    text-align: center;
+}
+
+table.blogHeader td.blogHeaderRight {
+    text-align: right;
+    vertical-align: bottom;
+}
+
+table.blogFooter {
+    color: #FFF;
+}
+
+table.blogFooter a:link,
+table.blogFooter a:active, 
+table.blogFooter a:visited {
+    font-weight: bold;
+    color: #99CCFF;
+    text-decoration: none;
+}
+
+table.blogFooter a:hover {
+    text-decoration: none;
+    color: #FFF;
+}
+
+table.blogFooter td.blogFooterLeft {
+    text-align: left;
+}
+
+table.blogFooter td.blogFooterCenter {
+    text-align: center;
+    font-size: 11px;
+}
+
+table.blogFooter td.blogFooterRight {
+    text-align: right;
+}
+
+#content {
+    position: relative;
+}
+
+/*** articles ***/
+
+.articleAll {
+    margin: 18px;
+}
+
+.photoAll {    
+    margin: 18px;
+ }
+
+.dayArticles {
+    padding: 0;
+    background-color: #FFF;
+    margin-bottom: 25px;
+    border-bottom: 1px dotted #ccc;
+    clear: both;
+    float: none;
+}
+
+.article {
+    position: relative;
+    padding: 0 25px 0 18px;
+    margin: 18px 0 32px 0;
+}
+
+.article p {
+    margin: 0 0 1em 0;
+}
+
+.articleTitle {
+    font: bold 16px Georgia,verdana,arial,geneva,sans-serif;
+    letter-spacing: -1px;
+    clear: both;
+    color: #6699CC;
+    background-color: transparent;    
+}
+
+.articleAuthor {
+    background-color: transparent;
+    color: #999;
+    font: normal 9px verdana,arial,geneva,sans-serif;
+    margin: 3px 0 13px 0;
+    clear: both;
+}
+
+.articleBody {
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+    line-height: 150%;
+    clear: both;  
+}
+
+div.articleBody font {
+    line-height: 150%;
+}
+
+div.articleBody table td,
+div.articleBody table th {
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+    line-height: 150%;
+}
+
+.articleMore {
+    font: normal 10px verdana,arial,geneva,sans-serif;
+}
+
+.articleStats {
+    margin-top: 10px;
+    font: normal 9px verdana,arial,geneva,sans-serif;
+    white-space: nowrap;
+    clear: both;
+    color: #999;
+}
+
+.postDate {
+    font: bold 12px Georgia,verdana,arial,geneva,sans-serif;
+    margin: 0 0 18px 0;
+    background-color: transparent;
+    padding: 0 18px 0 18px;
+    color: #FF9900;
+    white-space: nowrap;
+}
+
+.photoPostDate {
+    font: bold 12px Georgia,verdana,arial,geneva,sans-serif;
+    margin: 6px 0 0 0;
+    padding: 4px 0 2px 0;
+    background-color: transparent;
+    color: #FF9900;
+    white-space: nowrap;
+    border-top: 1px dotted #ccc;
+}
+
+/*** components ***/
+
+#leftcol {
+}
+
+#leftcol .component {
+    margin-bottom: 30px;
+    clear: both;
+    background-color: transparent;
+    border-collapse: collapse;
+}
+
+#leftcol .componentHead {
+    font: bold 12px Georgia,verdana,arial,geneva,sans-serif;
+    padding: 2px 0;
+    color: #336699;
+    border-bottom: 1px dotted #99CCFF;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+#leftcol .componentHead a {
+    text-decoration: none;
+}
+
+#leftcol .componentContent {
+    padding: 10px 0 0 10px;
+}
+
+#leftcol a {
+}
+
+#leftcol a:link, 
+#leftcol a:active, 
+#leftcol a:visited {
+}
+
+#leftcol a:hover {
+}
+
+#centercol {
+}
+
+#centercol a {
+}
+
+#centercol a:link, 
+#centercol a:active, 
+#centercol a:visited {
+}
+
+#rightcol {
+    text-align: left;
+    color: #ccc;
+}
+ 
+#rightcol .component {
+    margin-bottom: 30px;
+    text-align: left;
+    clear: both;
+    background-color: transparent;
+    color: #ccc;
+    border-collapse: collapse;
+}
+
+#rightcol .componentHead {
+    font: bold 12px Georgia,verdana,arial,geneva,sans-serif;
+    padding: 2px 0;
+    color: #6699CC;
+    text-align: left;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+#rightcol .componentHead a {
+    text-decoration: none;
+}
+
+#rightcol .componentContent {
+    padding: 4px 0 4px 12px;
+}
+
+#rightcol a {
+}
+
+#rightcol a:link, 
+#rightcol a:active, 
+#rightcol a:visited {
+    color: #99CCFF;
+}
+
+#rightcol a:hover {
+    color: #FF0000;
+}
+
+.componentRSSFeed {
+}
+
+.componentRSSFeed ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.componentRSSFeed ul li {
+    margin: 0 0 6px 0;
+}
+
+.componentBlogroll {
+    font-size: 11px;
+    line-height: 16px;
+}
+
+.componentBlogrollItem {
+    margin-bottom:6px;
+}
+
+.componentTopics {
+    line-height: 18px;
+}
+
+.componentTopicItem {
+    margin-bottom: 6px;
+}
+
+.componentArchive {
+    line-height: 20px;
+    white-space: nowrap;
+}
+
+.componentCalendar {
+    font: normal 9px verdana,arial,geneva,sans-serif;
+    background-color: transparent;
+    text-align: center;
+}
+
+table.componentCalendar {
+    font-size: 9px;
+}
+
+table.componentCalendar td.componentCalendarDayname {
+     padding: 0 1px;
+}
+
+table.componentCalendar td.componentCalendarDay {
+}
+
+.componentLogin {
+    text-align: right;
+}
+
+.componentWelcome {
+}
+
+.componentBlogname {
+    font: normal 27px verdana,arial,helvetica,sans-serif;
+    line-height: 30px;
+    letter-spacing: -1px;
+    background-color: transparent;
+    color: #FFF;
+}
+
+div.componentBlogname a:link, 
+div.componentBlogname a:visited,
+div.componentBlogname a:active
+{
+    text-decoration: none;
+    color: #FFF;
+    cursor: pointer;
+    font-weight: normal;
+    font-style: normal;
+}
+
+div.componentBlogname a:hover {
+    text-decoration: none;
+    color: #FFF;
+    cursor: pointer;
+    font-weight: normal;
+    font-style: normal;
+}
+
+.componentPostArticleLink,
+.componentEditArticleLink,
+.componentRssLink,
+.componentHomeLink,
+.componentEmailNotifyLink {
+    font: bold 10px verdana,arial,helvetica,sans-serif;
+    background-color: transparent;
+}
+
+table.blogHeader td.blogHeaderLeft div.componentText,
+table.blogHeader td.blogHeaderCenter div.componentText,
+table.blogHeader td.blogHeaderRight div.componentText,
+table.blogFooter td.blogFooterLeft div.componentText,
+table.blogFooter td.blogFooterCenter div.componentText,
+table.blogFooter td.blogFooterRight div.componentText 
+{
+    display: inline;
+    white-space: nowrap;
+    padding: 0 5px;
+}
+
+#leftcol div.componentText {
+    padding: 0;
+    margin-bottom: 4px;
+}
+
+#rightcol div.componentText {
+    padding: 0;
+    margin-bottom: 4px;
+}
+
+.componentRecentVisitors {
+}
+
+.componentRecentVisitorsItem {
+    margin-bottom: 8px;
+}
+ 
+.componentRecentTrackbacks {
+}
+
+.componentRecentTrackbacksItem {
+    margin-bottom: 8px;
+}
+
+.componentRecentEntries {
+}
+
+.componentRecentEntriesItem {
+    margin-bottom: 8px;
+}
+
+.componentRecentComments {
+}
+
+.componentRecentCommentsItem {
+    margin-bottom: 8px;
+}
+
+.componentRecentArticles {
+}
+
+.componentRecentArticlesItem {
+    margin-bottom: 8px;
+}
+
+.componentRecentPhotos {
+}
+
+.componentRecentPhotosItem {
+    margin-bottom: 12px;
+}
+
+.componentRecentPhotosItem img {
+    border: 1px solid #000;
+}
+
+/*** comments ***/
+
+.commentForm {
+    padding: 8px;
+    margin: 0;
+    clear: both;
+    background-color: #eee;
+}
+
+.commentFormInline {
+    padding: 8px;
+    margin: 8px 0;
+    clear: both;
+    background-color: #eee;
+}
+
+.commentsHead {
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    background-color: transparent;
+    color: #FF9900;
+    text-transform: uppercase;
+    padding-top: 2px;
+    border-top: 2px solid #ccc;
+}
+
+.comments {
+    margin: 12px 0 18px 0;
+    clear: both;
+}
+
+.commentTitle {
+    font: bold 11px Georgia,verdana,arial,geneva,sans-serif;
+    padding-bottom: 2px;
+    color: #6699CC;
+    background-color: transparent;
+}
+
+.commentAuthor {
+    font: normal 9px verdana,arial,geneva,sans-serif;
+    margin-bottom: 8px;
+    padding-top: 2px;
+    border-top: 1px solid #ccc;
+    color: #999;
+    background-color: transparent;
+}
+
+.commentReply {
+    font-weight: bold;
+    font-size: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.commentBody {
+    line-height: 135%;
+}
+
+.comment {
+    padding-bottom: 5px;
+    margin: 12px 0;
+}
+
+.commentReplyRef {
+    padding-bottom: 5px;
+    margin: 0 0 12px 0;
+}
+
+.commentIndent0 {}
+.commentIndent1 {margin-left:25px;}
+.commentIndent2 {margin-left:50px;}
+.commentIndent3 {margin-left:75px;}
+.commentIndent4 {margin-left:100px;}
+.commentIndent5 {margin-left:125px;}
+.commentIndent6 {margin-left:150px;}
+.commentIndent7 {margin-left:175px;}
+.commentIndent8 {margin-left:200px;}
+
+/*** trackbacks ***/
+
+.trackbacks {
+    margin: 12px 0;
+    clear: both;
+}
+
+.trackbacksHead {
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    background-color: transparent;
+    color: #FF9900;
+    text-transform: uppercase;
+    border-top: 2px solid #ccc;
+    padding-top: 2px;
+}
+
+.trackback {
+    border-bottom: 1px dotted #666;
+    padding-bottom: 12px;
+    margin: 12px 0;
+}
+
+/*** photo albums ***/
+
+table.thumbnails {
+    clear: both;
+}
+
+table.thumbnails td {
+    padding: 0 12px 0 0;
+}
+
+table.thumbnails td.row {
+    padding: 0 12px 0 0;
+}
+
+table.thumbnails td.emptyRow {
+}
+
+table.thumbnailsByDay {
+}
+
+table.thumbnailsByDay td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0 12px 0 0;
+}
+
+.thumbnailCaption {
+    line-height: 13px;
+    margin: 0 0 16px 0;
+}
+
+.thumbnail {
+    margin-bottom: 2px;
+}
+
+.thumbnail img {
+    border: 1px solid #ccc;
+    padding: 3px;
+}
+
+img.photo {
+    border: 2px solid #666;
+    margin: 0 0 10px 0;
+}
+
+/*** text headers ***/
+
+.sectionHead1 {
+    font-weight: bold;
+    font-size: 13px;
+    background-color: transparent;
+    margin-bottom: 16px;
+}
+
+/*** misc ***/
+
+.categoryPostList {
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+    margin: 18px 0;
+    clear: both;
+}
+
+table.categoryPostListTable {
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+}
+
+.categoryBreadcrumb {
+    text-align: left;
+    margin: 0 18px 18px 18px;
+    white-space: nowrap;
+}
+
+.categoryBreadcrumb a:link, 
+.categoryBreadcrumb a:active, 
+.categoryBreadcrumb a:visited {
+}
+
+.categoryBreadcrumb a:hover {
+}
+
+.articleBreadcrumb {
+    white-space: nowrap;
+    padding: 6px 0 6px 0;
+    margin: 15px 18px;
+    font: normal 10px Verdana,Helvetica,Arial,sans-serif;
+    border-top: 1px dotted #666;
+    border-bottom: 1px dotted #666;
+}
+
+.photoBreadcrumb {
+    white-space: nowrap;
+    padding: 6px 0 6px 0;
+    margin: 0 4px 12px 8px;
+    font: normal 10px Verdana,Helvetica,Arial,sans-serif;
+    border-top: 1px dotted #666;
+    border-bottom: 1px dotted #666;
+}
+
+div.articleBreadcrumb table {
+    font: normal 10px Verdana,Helvetica,Arial,sans-serif;
+}
+
+div.photoBreadcrumb table {
+    font: normal 10px Verdana,Helvetica,Arial,sans-serif;
+}
+
+div.articleBreadcrumb span.emph {
+    font-weight: bold;
+    background-color: transparent;
+    color: #FF9900;
+}
+
+div.photoBreadcrumb span.emph {
+    font-weight: bold;
+    background-color: transparent;
+    color: #FF9900;
+}
+
+.pager {
+    margin: 12px 0;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.articlePrintLink {
+    font: normal 11px Verdana,Helvetica,Arial,sans-serif;
+    margin-top: 12px;
+    clear: both;
+}
+
+.emph {
+    font-weight:bold;
+}
+
+.noncompliant {
+    display: none;
+}
+
+.message {
+    margin-bottom: 16px;
+}
+
+/*** thumbnails ***/
+
+div.dayPhotos {
+}
+
+div.thumbcontainer {
+    background-color: #fff;
+}
+
+div.thumb {
+    width: 150px;
+    margin: 0 12px 20px 0;
+    float: left;
+}
+
+div.spacer {
+    clear: both;
+}
+
+div.thumb img {
+    border: 1px solid #666;
+    margin: 0 0 4px 0;
+}
+
+div.thumbcaption {
+    line-height: 13px;
+    text-align: left;
+}
+
+/***************/
+
+div.articleAll div.article  {
+    padding: 0;
+}
+
+div.photoAll div.article  {
+    padding: 0;
+}
+
+div.articleAll div.articleBreadcrumb {
+    margin: 0 0 25px 0;
+}
+
+div.photoAll div.articleBreadcrumb {
+    margin: 0 0 25px 0;
+}
+
+#rightcol table td {
+    color: #ccc;
+}
+
+#rightcol table.componentCalendar td.componentCalendarDayname {
+     color: #ccc;
+}
+
+#rightcol table.componentCalendar {
+     color: #ccc;
+}
+
+/*******************/
+
+.editButtons {
+    margin: 16px 0 0 0;
+}
+
+img.editButtonOn,
+img.editButtonOff,
+img.editButtonDown,
+img.editButtonUp {
+    width: 23px;
+    height: 22px;
+    cursor: pointer;
+}
+
+.editButtonOn {
+    border: 1px solid #000;
+    background: #eee;
+}
+
+.editButtonOff {
+    border: 1px solid #dedede;
+    background: #FFF;
+}
+
+.editButtonDown {
+    background: #ccc;
+}
+
+.editButtonUp {
+    background: #FFF;
+}
+
+/*******************/
+
+.reviewBox {
+    margin-bottom: 25px;
+}
+
+table.reviewDetails {
+    border: 1px solid #336699;
+}
+
+table.reviewDetails td.reviewTitle {
+    font: bold 13px verdana,arial,helvetica,sans-serif;
+    background-color: #336699;
+    color: #FFF;
+}
+
+table.reviewDetails td.reviewDetailLabel {
+    font: bold 10px verdana,arial,helvetica,sans-serif;
+    text-align: right;
+    white-space: nowrap;
+    background-color: #6699CC;
+    color: #FFF;
+}
+
+table.reviewDetails td.reviewDetailValue {
+    font: normal 10px verdana,arial,helvetica,sans-serif;
+}
+
+.updatedAlbumBox {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #0F4275;
+    padding: 0;
+    margin: 0 25px 25px 18px;
+    text-align:left;
+}
+
+table.updatedAlbumHead {
+    margin: 0;
+    padding: 3px 8px;
+    background-color: #6699CC;
+    color: #fff;
+}
+
+table.updatedAlbumHead td.albumName {
+    font-weight: bold;
+}
+
+table.updatedAlbumHead td.albumName a {
+    text-decoration: none;
+    color: #fff;
+}
+
+table.updatedAlbumHead td.albumName a:link,
+table.updatedAlbumHead td.albumName a:active,
+table.updatedAlbumHead td.albumName a:visited 
+{
+    text-decoration: none;
+    color: #fff;
+}
+
+table.updatedAlbumHead td.albumName a:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+
+table.updatedAlbumHead td.updateTime {
+    font: normal 9px verdana,arial,sans-serif;
+}
+
+/*** minithumbs ***/
+
+.miniThumbCount {
+}
+
+.miniThumbCount a {
+    text-decoration: none;
+}
+
+.miniThumbSizedImg {
+    border: 1px solid #000;
+}
+
+.miniThumbHorizContainer {
+    clear: both;
+}
+
+.miniThumbHoriz {
+    float: left;
+    margin: 0 6px 0 0;
+    padding: 0;
+}
+
+.miniThumbVertContainer {
+    margin: 0;
+}
+
+.miniThumbVert {
+    margin: 0 0 6px 0;
+    padding: 0;
+}
+
+.miniThumbDefaultImg {
+    padding: 2px;
+    border: 1px solid #000;
+    background-color: #fff;
+}
+
+.miniThumbSelectedImg {
+    padding: 0;
+    border: 3px solid #ff0000;
+    background-color: #fff;
+}
+
+.miniThumbSizedCaption {
+    text-align: left;
+    margin: 5px 0 8px 0;
+}
+
+.miniThumbLinks {
+    margin-bottom: 12px;
+}
