@@ -12,9 +12,27 @@ namespace WIT.Common.PDFCertificateGenerator
     {
         private string outputPath;
         private string templateFile;
-
+        private string fileName;
         public CertificateGeneratorManager(string outputPath, string templateFile)
         {
+            SetParameters(outputPath, templateFile, Guid.NewGuid().ToString());
+        }
+
+        public CertificateGeneratorManager(string outputPath, string templateFile, string fileName)
+        {
+            SetParameters(outputPath, templateFile, fileName);
+        }
+
+        private void SetParameters(string outputPath, string templateFile, string fileName)
+        {
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                this.fileName = fileName;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
             if (Directory.Exists(outputPath))
             {
                 this.outputPath = outputPath;
@@ -36,8 +54,13 @@ namespace WIT.Common.PDFCertificateGenerator
 
         public string Generate(List<CertificateElement> elements)
         {
-            string file = this.outputPath + @"\" + Guid.NewGuid().ToString() + ".pdf";
-            Document d = new Document(new Rectangle(1661, 1183));
+            string file = this.outputPath + @"\" + fileName + ".pdf";
+
+            Image i = Image.GetInstance(this.templateFile);
+            float height = i.Height;
+            float width = i.Width;
+            
+            Document d = new Document(new Rectangle(width, height));
             PdfWriter w = PdfWriter.GetInstance(d, new FileStream(file, FileMode.Create));
             d.Open();
             w.Open();
@@ -54,8 +77,7 @@ namespace WIT.Common.PDFCertificateGenerator
             }
 
             cb.EndText();
-
-            Image i = Image.GetInstance(this.templateFile);
+            
             i.SetAbsolutePosition(0, 0);
             d.Add(i);
 
