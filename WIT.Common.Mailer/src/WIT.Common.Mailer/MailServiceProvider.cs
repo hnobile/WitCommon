@@ -7,7 +7,7 @@ namespace WIT.Common.Mailer
     {
         private static IMailService _instance = null;
 
-        public IMailService Instance
+        public static IMailService Instance
         {
             get
             {
