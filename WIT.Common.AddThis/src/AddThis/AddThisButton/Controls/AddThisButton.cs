@@ -7,6 +7,23 @@ namespace WIT.Common.AddThis.Controls
     public partial class AddThisButton : System.Web.UI.Control
     {
         #region Properties
+
+        public string UserName
+        {
+            get
+            {
+                if (ViewState[this.UniqueID + ".UserName"] == null)
+                {
+                    return string.Empty;
+                }
+                return (string)ViewState[this.UniqueID + ".UserName"];
+            }
+            set
+            {
+                ViewState.Add(this.UniqueID + ".UserName", value);
+            }
+        }
+
         /// <summary>
         /// URL to share, by default if its not setted will use current location.
         /// </summary>
@@ -14,14 +31,11 @@ namespace WIT.Common.AddThis.Controls
         {
             get
             {
-                try
-                {
-                    return (string)ViewState[this.UniqueID + ".URL"];
-                }
-                catch
+                if (ViewState[this.UniqueID + ".URL"] == null)
                 {
                     return string.Empty;
                 }
+                return (string)ViewState[this.UniqueID + ".URL"];
             }
             set
             {
@@ -36,14 +50,11 @@ namespace WIT.Common.AddThis.Controls
         {
             get
             {
-                try
-                {
-                    return (string)ViewState[this.UniqueID + ".Title"];
-                }
-                catch
+                if (ViewState[this.UniqueID + ".Title"] == null)
                 {
                     return string.Empty;
                 }
+                return (string)ViewState[this.UniqueID + ".Title"];
             }
             set
             {
@@ -60,14 +71,11 @@ namespace WIT.Common.AddThis.Controls
         {
             get
             {
-                try
-                {
-                    return (string)ViewState[this.UniqueID + ".SelectedLanguage"];
-                }
-                catch
+                if (ViewState[this.UniqueID + ".SelectedLanguage"] == null)
                 {
                     return WellKnownKeys.ui_language_en;
                 }
+                return (string)ViewState[this.UniqueID + ".SelectedLanguage"];
             }
             set
             {
@@ -82,14 +90,11 @@ namespace WIT.Common.AddThis.Controls
         {
             get
             {
-                try
-                {
-                    return (string)ViewState[this.UniqueID + ".TextMore"];
-                }
-                catch
+                if (ViewState[this.UniqueID + ".TextMore"] == null)
                 {
                     return string.Empty;
                 }
+                return (string)ViewState[this.UniqueID + ".TextMore"];
             }
             set
             {
@@ -104,14 +109,11 @@ namespace WIT.Common.AddThis.Controls
         {
             get
             {
-                try
-                {
-                    return (string)ViewState[this.UniqueID + ".MenuServices"];
-                }
-                catch
+                if (ViewState[this.UniqueID + ".MenuServices"] == null)
                 {
                     return string.Empty;
                 }
+                return (string)ViewState[this.UniqueID + ".MenuServices"];
             }
             set
             {
@@ -129,14 +131,11 @@ namespace WIT.Common.AddThis.Controls
         {
             get
             {
-                try
-                {
-                    return (string)ViewState[this.UniqueID + ".IncludeMoreServices"];
-                }
-                catch
+                if (ViewState[this.UniqueID + ".IncludeMoreServices"] == null)
                 {
                     return string.Empty;
                 }
+                return (string)ViewState[this.UniqueID + ".IncludeMoreServices"];
             }
             set
             {
@@ -152,18 +151,34 @@ namespace WIT.Common.AddThis.Controls
         {
             get
             {
-                try
-                {
-                    return (string)ViewState[this.UniqueID + ".ExcludeMoreServices"];
-                }
-                catch
+                if (ViewState[this.UniqueID + ".ExcludeMoreServices"] == null)
                 {
                     return string.Empty;
                 }
+                return (string)ViewState[this.UniqueID + ".ExcludeMoreServices"];
             }
             set
             {
                 ViewState.Add(this.UniqueID + ".ExcludeMoreServices", value);
+            }
+        }
+
+        /// <summary>
+        /// name of template to use for emailed shares
+        /// </summary>
+        public string EmailTemplateName
+        {
+            get
+            {
+                if (ViewState[this.UniqueID + ".EmailTemplateName"] == null)
+                {
+                    return string.Empty;
+                }
+                return (string)ViewState[this.UniqueID + ".EmailTemplateName"];
+            }
+            set
+            {
+                ViewState.Add(this.UniqueID + ".EmailTemplateName", value);
             }
         }
 
@@ -174,14 +189,11 @@ namespace WIT.Common.AddThis.Controls
         {
             get
             {
-                try
-                {
-                    return (string)ViewState[this.UniqueID + ".Separator"];
-                }
-                catch
+                if (ViewState[this.UniqueID + ".Separator"] == null)
                 {
                     return string.Empty;
                 }
+                return (string)ViewState[this.UniqueID + ".Separator"];
             }
             set
             {
@@ -197,8 +209,21 @@ namespace WIT.Common.AddThis.Controls
         {
             get
             {
-                string addThisButtonAPI = (string)ViewState[this.UniqueID + ".AddThisButtonAPI"];
-                return (!string.IsNullOrEmpty(addThisButtonAPI)) ? addThisButtonAPI : "http://s7.addthis.com/js/250/addthis_widget.js?pub=xa-4a60bb071de35881";
+                if (ViewState[this.UniqueID + ".AddThisButtonAPI"] == null)
+                {
+                    if (string.IsNullOrEmpty(UserName))
+                    {
+                        return "http://s7.addthis.com/js/250/addthis_widget.js?pub=xa-4a60bb071de35881";
+                    }
+                    else
+                    {
+                        return "http://s7.addthis.com/js/250/addthis_widget.js#username=" + UserName;
+                    }
+                }
+                else
+                {
+                    return (string)(ViewState[this.UniqueID + ".AddThisButtonAPI"]);
+                }
             }
             set
             {
@@ -210,14 +235,11 @@ namespace WIT.Common.AddThis.Controls
         {
             get
             {
-                try
-                {
-                    return (string)ViewState[this.UniqueID + ".Style"];
-                }
-                catch
+                if (ViewState[this.UniqueID + ".Style"] == null)
                 {
                     return string.Empty;
                 }
+                return (string)ViewState[this.UniqueID + ".Style"];
             }
             set
             {
@@ -229,18 +251,41 @@ namespace WIT.Common.AddThis.Controls
         {
             get
             {
-                try
-                {
-                    return (string)ViewState[this.UniqueID + ".CssClass"];
-                }
-                catch
+                if (ViewState[this.UniqueID + ".CssClass"] == null)
                 {
                     return string.Empty;
                 }
+                return (string)ViewState[this.UniqueID + ".CssClass"];
             }
             set
             {
                 ViewState.Add(this.UniqueID + ".CssClass", value);
+            }
+        }
+
+        public string BookMarkURL
+        {
+            get
+            {
+                if (ViewState[this.UniqueID + ".BookMarkURL"] == null)
+                {
+                    if (string.IsNullOrEmpty(UserName))
+                    {
+                        return "http://www.addthis.com/bookmark.php?v=250&pub=xa-4a60bb071de35881";
+                    }
+                    else
+                    {
+                        return "http://www.addthis.com/bookmark.php?v=250&amp;username=" + UserName;
+                    }
+                }
+                else
+                {
+                    return (string)ViewState[this.UniqueID + ".BookMarkURL"];
+                }
+            }
+            set
+            {
+                ViewState.Add(this.UniqueID + ".BookMarkURL", value);
             }
         }
         #endregion
@@ -263,9 +308,10 @@ namespace WIT.Common.AddThis.Controls
             writer.WriteLine("<div class='" + ((!string.IsNullOrEmpty(CssClass)) ? CssClass : "addthis_toolbox addthis_default_style") + "'" + ((!string.IsNullOrEmpty(Style)) ? "style='" + Style + "'" : string.Empty));
                 writer.WriteLine((!string.IsNullOrEmpty(URL) ? "addthis:url='" + URL + "'" : ((this.Page.Request.Url != null) ? "addthis:url='" + this.Page.Request.Url.ToString() + "'" : string.Empty)));
                 writer.WriteLine(!string.IsNullOrEmpty(Title) ? "addthis:title='" + Title + "'" : string.Empty);
+                writer.WriteLine(!string.IsNullOrEmpty(EmailTemplateName) ? "addthis:email_template='" + EmailTemplateName + "'" : string.Empty);
                 writer.WriteLine((!string.IsNullOrEmpty(SelectedLanguage) ? "addthis:ui_language='" + SelectedLanguage + "'" : string.Empty) + ">");
                 writer.WriteLine("<table><tr>");
-                writer.WriteLine(BuildMenuServices() + (!string.IsNullOrEmpty(Separator) ? "<td><span class='addthis_separator'>" + Separator + "</span></td>" : string.Empty) + "<td><a href='http://www.addthis.com/bookmark.php?v=250&pub=xa-4a60bb071de35881' class='addthis_button_expanded'>" + TextMore + "</a></td>");
+                writer.WriteLine(BuildMenuServices() + (!string.IsNullOrEmpty(Separator) ? "<td><span class='addthis_separator'>" + Separator + "</span></td>" : string.Empty) + "<td><a href='" + BookMarkURL + "' class='addthis_button_expanded'>" + TextMore + "</a></td>");
                 writer.WriteLine("</tr></table>");
             writer.WriteLine("</div>");
         }
@@ -276,12 +322,16 @@ namespace WIT.Common.AddThis.Controls
             {
                 StringBuilder script = new StringBuilder();
                 script.Append("<script type='text/javascript' language='javascript'>");
+                /*#### CONFIGURATION ####*/
                 script.Append("var addthis_config=");
                 script.Append("{");
-                script.Append(!string.IsNullOrEmpty(IncludeMoreServices) ? "services_expanded: '" + IncludeMoreServices + "'," : string.Empty);
-                script.Append(!string.IsNullOrEmpty(ExcludeMoreServices) ? "services_exclude: '" + ExcludeMoreServices + "'," : string.Empty);
+                    script.Append(!string.IsNullOrEmpty(IncludeMoreServices) ? "services_expanded: '" + IncludeMoreServices + "'," : string.Empty);
+                    script.Append(!string.IsNullOrEmpty(ExcludeMoreServices) ? "services_exclude: '" + ExcludeMoreServices + "'," : string.Empty);
                 script.Append("};");
-                script.Append("var addthis_share={};");
+                /*#### SHARING ##########*/
+                script.Append("var addthis_share=");
+                script.Append("{");
+                script.Append("};");
                 script.Append("</script>");
 
                 this.Page.ClientScript.RegisterClientScriptBlock(this.Page.GetType(), "AddThisButtonConfigurationScript", script.ToString());
