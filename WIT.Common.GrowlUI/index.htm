@@ -2,37 +2,14 @@
 <HTML> 
 	<head>
 	<script src="./js/jquery-1.3.2.min.js" type="text/javascript"></script> 
-	<script src="./js/jquery.blockUI.js" type="text/javascript"></script> 
+	<script src="./js/jquery.jgrowl.min.js" type="text/javascript"></script> 
 
+	<link href="./css/jquery.jgrowl.css" media="all" rel="stylesheet"> 
 	<style type="text/css"> 
-		div.alerta { background: url(./images/t_alert.png) no-repeat 10px 10px }
-		div.info { background: url(./images/t_info.png) no-repeat 10px 10px }
-		div.success { background: url(./images/t_success.png) no-repeat 10px 10px }
-		div.error { background: url(./images/t_error.png) no-repeat 10px 10px }
-		div.growlUI h1 {
-			color: white; padding: 5px 5px 5px 75px; text-align: left; font-size: 15pt; font-family:Calibri;
-		}
-		div.growlUI h2 {
-			color: white; padding: 5px 5px 5px 75px; text-align: left; font-size: 12pt; font-family:Calibri;
-		}
-		h1 {
-			font-family: sans-serif;
-			color: #0068B8;
-		}
-		
-		li.LOCKED {
-			font-weight: bold;
-		}
-		.tooltip { 
-			display:none; 
-			background-color:#ffa; 
-			border:1px solid #cc9; 
-			padding:3px; 
-			font-size:13px;
-			font-family:calibri, "Franklin Gothic Book", "Franklin Gothic Demi", Verdana;
-			-moz-box-shadow: 2px 2px 11px #666; 
-			-webkit-box-shadow: 2px 2px 11px #666; 
-		}
+		.alert { background: url(./images/t_alert.png) no-repeat 10px 10px }
+		.info { background: url(./images/t_info.png) no-repeat 10px 10px }
+		.success { background: url(./images/t_success.png) no-repeat 10px 10px }
+		.error { background: url(./images/t_error.png) no-repeat 10px 10px }
 	</style>
 	</head> 
 	<body onload="test();"> 
@@ -40,10 +17,10 @@
 <script>
 function test()
 {
-setTimeout("$.growlUI('Alert!','Test Message.','alerta');",1000);
-setTimeout("$.growlUI('Success!','Test Message.','success');",2000);
-setTimeout("$.growlUI('Error!','Test Message.','error');",3000);
-setTimeout("$.growlUI('Info!','Test Message.','info');",4000);
+setTimeout("$.jGrowl('Test Message.',{ sticky: true, header: 'Alert!', theme: 'alert'});",1000);
+setTimeout("$.jGrowl('Test Message.',{ sticky: true, header: 'Success!', theme: 'success'});",2000);
+setTimeout("$.jGrowl('Test Message.',{ sticky: true, header: 'Error!', theme: 'error'});",3000);
+setTimeout("$.jGrowl('Test Message.',{ sticky: true, header: 'Info!', theme: 'info'});",4000);
 }
 </script>
 </html>
