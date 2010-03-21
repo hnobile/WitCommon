@@ -11,37 +11,79 @@ namespace WITAudioMixer
     {
         static void Main(string[] args)
         {
-            ConsoleArgumentsParser parameters = new ConsoleArgumentsParser(args);
+            try
+            {
+                ConsoleArgumentsParser parameters = new ConsoleArgumentsParser(args);
 
-            string audioFile1 = String.Empty,
-                audioFile2 = String.Empty,
-                offset = String.Empty,
-                initialSilenceMs = "0",
-                outputFile = String.Empty;
+                string action = String.Empty,
+                    audioFile1 = String.Empty,
+                    audioFile2 = String.Empty,
+                    offset = String.Empty,
+                    initialSilenceMs = "0",
+                    outputFile = String.Empty;
 
-            if (parameters["audioFile1"] != null)
-            {
-                audioFile1 = parameters["audioFile1"];
+                if (parameters["action"] != null)
+                {
+                    action = parameters["action"];
+                }
+                if (parameters["audioFile1"] != null)
+                {
+                    audioFile1 = parameters["audioFile1"];
+                }
+                if (parameters["audioFile2"] != null)
+                {
+                    audioFile2 = parameters["audioFile2"];
+                }
+                if (parameters["offset"] != null)
+                {
+                    offset = parameters["offset"];
+                }
+                if (parameters["initialSilenceMs"] != null)
+                {
+                    initialSilenceMs = parameters["initialSilenceMs"];
+                }
+                if (parameters["outputFile"] != null)
+                {
+                    outputFile = parameters["outputFile"];
+                }
+
+                switch (action)
+                {
+                    case "merge":
+                        Program.mergeAudios(audioFile1, audioFile2, long.Parse(offset), long.Parse(initialSilenceMs), outputFile);
+                        break;
+                    case "addSilence":
+                        Program.generateAudioWithSilenceFirst(audioFile1, long.Parse(initialSilenceMs), outputFile);
+                        break;
+                    default:
+                        break;
+                }
             }
-            if (parameters["audioFile2"] != null)
-            {
-                audioFile2 = parameters["audioFile2"];
-            }
-            if (parameters["offset"] != null)
-            {
-                offset = parameters["offset"];
-            }
-            if (parameters["initialSilenceMs"] != null)
-            {
-                initialSilenceMs = parameters["initialSilenceMs"];
-            }
-            if (parameters["outputFile"] != null)
-            {
-                outputFile = parameters["outputFile"];
+            catch (Exception ex) {
+                Console.WriteLine("WITAaudio Mixer Error: " + ex.Message);
             }
 
-            Program.mergeAudios(audioFile1, audioFile2, long.Parse(offset), long.Parse(initialSilenceMs), outputFile);
+        }
 
+        private static void generateAudioWithSilenceFirst(string audioFile, long initialSilenceMs, string outputFile)
+        {
+            var audio = new WaveFileReader(audioFile);
+
+            // Create mixer.
+            var mixer = new WaveMixerStream32();
+            mixer.AutoStop = true; // Not sure if this is needed but it seemed safer to have it.
+
+            var introSilence = TimeSpan.FromMilliseconds(initialSilenceMs);
+
+            // Offset audios for mixing.
+            var audioOffsetted = new WaveOffsetStream(audio, introSilence, TimeSpan.Zero, audio.TotalTime);
+
+            // Add audios to the mixer turning them into non-padding 32bit ieee wavs; it's the only thing the mixer can handle.
+            var audio32 = new WaveChannel32(audioOffsetted);
+            audio32.PadWithZeroes = false;
+            mixer.AddInputStream(audio32);
+
+            WaveFileWriter.CreateWaveFile(outputFile, new Wave32To16Stream(mixer));
         }
 
         private static void mergeAudios(
