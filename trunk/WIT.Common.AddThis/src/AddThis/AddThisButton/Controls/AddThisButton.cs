@@ -325,8 +325,8 @@ namespace WIT.Common.AddThis.Controls
                 /*#### CONFIGURATION ####*/
                 script.Append("var addthis_config=");
                 script.Append("{");
-                    script.Append(!string.IsNullOrEmpty(IncludeMoreServices) ? "services_expanded: '" + IncludeMoreServices + "'," : string.Empty);
-                    script.Append(!string.IsNullOrEmpty(ExcludeMoreServices) ? "services_exclude: '" + ExcludeMoreServices + "'," : string.Empty);
+                script.Append(!string.IsNullOrEmpty(IncludeMoreServices) ? "services_expanded: '" + IncludeMoreServices + "'" + (!string.IsNullOrEmpty(ExcludeMoreServices)?",":"") : string.Empty);
+                    script.Append(!string.IsNullOrEmpty(ExcludeMoreServices) ? "services_exclude: '" + ExcludeMoreServices + "'" : string.Empty);
                 script.Append("};");
                 /*#### SHARING ##########*/
                 script.Append("var addthis_share=");
