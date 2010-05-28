@@ -31,7 +31,7 @@ namespace WIT.Common.ReflectionHelper
             }
             catch (Exception ex)
             {
-                throw new ReflectionException("Invalid type name:" + TypeName, ex);
+                throw new ReflectionException("Invalid type name: " + TypeName, ex);
             }
 
             bool ImplementsInterface = false;
