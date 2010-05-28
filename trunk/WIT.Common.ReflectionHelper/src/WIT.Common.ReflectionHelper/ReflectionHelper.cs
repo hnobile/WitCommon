@@ -21,9 +21,13 @@ namespace WIT.Common.ReflectionHelper
             Type Interface = typeof(T);
 
             Type ReflectedType = null;
+
             try
             {
                 ReflectedType = Type.GetType(TypeName);
+
+                if (ReflectedType == null)
+                    throw new ArgumentException("Invalid Type Name");
             }
             catch (Exception ex)
             {
