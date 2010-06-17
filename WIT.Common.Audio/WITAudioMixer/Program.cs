@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NAudio.Wave;
 using WIT.Common.Helpers.Text;
+using System.IO;
 
 namespace WITAudioMixer
 {
@@ -89,31 +90,66 @@ namespace WITAudioMixer
         private static void mergeAudios(
             string audioFile1, string audioFile2, long offset, long initialSilenceMs, string outputFile)
         {
-            var audio1 = new WaveFileReader(audioFile1);
-            var audio2 = new WaveFileReader(audioFile2);
+            WaveFileReader audio1 = null;
+            WaveFileReader audio2 = null;
 
+            try
+            {
+                audio1 = new WaveFileReader(audioFile1);
+            }
+            catch (Exception) { 
+                //If this file cannot be read, gracefuly ignore the error because we are going to ignore the file anyway
+            }
+            try
+            {
+                audio2 = new WaveFileReader(audioFile2);
+            }
+            catch (Exception) {
+                //If this file cannot be read, gracefuly ignore the error because we are going to ignore the file anyway
+            }
             // Create mixer.
             var mixer = new WaveMixerStream32();
             mixer.AutoStop = true; // Not sure if this is needed but it seemed safer to have it.
 
-            // Offset audio 1 for mixing.
-            var introSilence = TimeSpan.FromMilliseconds(initialSilenceMs);
-            var audio1Offseted = new WaveOffsetStream(audio1, introSilence, TimeSpan.Zero, audio1.TotalTime);
+            //If we have the 2 files, merge them
+            if (audio1 != null && audio2 != null)
+            {
+                // Offset audio 1 for mixing.
+                var introSilence = TimeSpan.FromMilliseconds(initialSilenceMs);
+                var audio1Offseted = new WaveOffsetStream(audio1, introSilence, TimeSpan.Zero, audio1.TotalTime);
 
-            // Offset audio 2 for mixing.
-            var audio2Offset = introSilence + TimeSpan.FromMilliseconds(offset);
-            var audio2Offsetted = new WaveOffsetStream(audio2, audio2Offset, TimeSpan.Zero, audio2.TotalTime);
+                // Offset audio 2 for mixing.
+                var audio2Offset = TimeSpan.FromMilliseconds(offset);
+                var audio2Offsetted = new WaveOffsetStream(audio2, audio2Offset, TimeSpan.Zero, audio2.TotalTime);
 
-            // Add audios to the mixer turning them into non-padding 32bit ieee wavs; it's the only thing the mixer can handle.
-            var intro32 = new WaveChannel32(audio1Offseted);
-            intro32.PadWithZeroes = false;
-            mixer.AddInputStream(intro32);
-            var outro32 = new WaveChannel32(audio2Offsetted);
-            outro32.PadWithZeroes = false;
-            mixer.AddInputStream(outro32);
+                // Add audios to the mixer turning them into non-padding 32bit ieee wavs; it's the only thing the mixer can handle.
+                var intro32 = new WaveChannel32(audio1Offseted);
+                intro32.PadWithZeroes = false;
+                mixer.AddInputStream(intro32);
+                var outro32 = new WaveChannel32(audio2Offsetted);
+                outro32.PadWithZeroes = false;
+                mixer.AddInputStream(outro32);
 
-            var tempwav = outputFile;
-            WaveFileWriter.CreateWaveFile(tempwav, new Wave32To16Stream(mixer));
+                var tempwav = outputFile;
+                WaveFileWriter.CreateWaveFile(tempwav, new Wave32To16Stream(mixer));
+            }
+            else if (audio1 == null && audio2 != null) {
+                //If we only have audio2, use it as the merged result
+                var outro32 = new WaveChannel32(audio2);
+                outro32.PadWithZeroes = false;
+                mixer.AddInputStream(outro32);
+                var tempwav = outputFile;
+                WaveFileWriter.CreateWaveFile(tempwav, new Wave32To16Stream(mixer));
+            }
+            else if (audio1 != null && audio2 == null)
+            {
+                //If we only have audio1, use it as the merged result
+                var outro32 = new WaveChannel32(audio1);
+                outro32.PadWithZeroes = false;
+                mixer.AddInputStream(outro32);
+                var tempwav = outputFile;
+                WaveFileWriter.CreateWaveFile(tempwav, new Wave32To16Stream(mixer));
+            }
         }
     }
 }
