@@ -1,0 +1,325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.1  (Win32)">
+	<META NAME="AUTHOR" CONTENT="WORM HOLE">
+	<META NAME="CREATED" CONTENT="20100630;12193300">
+	<META NAME="CHANGEDBY" CONTENT="WORM HOLE">
+	<META NAME="CHANGED" CONTENT="20100630;12240100">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in }
+		H2 { margin-bottom: 0.08in }
+		H3 { margin-bottom: 0.08in }
+		TD P { margin-bottom: 0in }
+		TH P { margin-bottom: 0in }
+		A:link { so-language: zxx }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<H2><A NAME="pageTitle"></A><A HREF="http://stanlemon.net/projects/jgrowl.html">jGrowl</A></H2>
+<P>jGrowl is a jQuery plugin that raises unobtrusive messages within
+the browser, similar to the way that OS X's <A HREF="http://growl.info/">Growl
+Framework</A> works.</P>
+<H3><A NAME="samples"></A>Example Usage and Samples:</H3>
+<PRE>// Sample 1
+$.jGrowl(&quot;Hello world!&quot;);
+// Sample 2
+$.jGrowl(&quot;Stick this!&quot;, { sticky: true });
+// Sample 3
+$.jGrowl(&quot;A message with a header&quot;, { header: 'Important' });
+// Sample 4
+$.jGrowl(&quot;A message that will live a little longer.&quot;, { life: 10000 });
+// Sample 5
+$.jGrowl(&quot;A message with a beforeOpen callback and a different opening animation.&quot;, {
+    beforeClose: function(e,m) {
+        alert('About to close this notification!');
+    },
+    animateOpen: {
+        height: 'show'
+    }
+});</PRE><H3>
+jGrowl Options:</H3>
+<TABLE WIDTH=740 BORDER=0 CELLPADDING=2 CELLSPACING=0>
+	<COL WIDTH=112>
+	<COL WIDTH=138>
+	<COL WIDTH=478>
+	<TR>
+		<TH WIDTH=112>
+			<P>Option Name:</P>
+		</TH>
+		<TH WIDTH=138>
+			<P>Default Value:</P>
+		</TH>
+		<TH WIDTH=478>
+			<P>Explanation:</P>
+		</TH>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>header</P>
+		</TD>
+		<TD WIDTH=138>
+			<P><EM>empty string</EM></P>
+		</TD>
+		<TD WIDTH=478>
+			<P>Optional header to prefix the message, this is often helpful
+			for associating messages to each other.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>sticky</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>false</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>When set to true a message will <EM>stick</EM> to the screen
+			until it is intentionally closed by the user.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>glue</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>after</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>Designates whether a jGrowl notification should be appended to
+			the container after all notifications, or whether it should be
+			prepended to the container before all notifications. Options are
+			<EM>after</EM> or <EM>before</EM>.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>position</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>top-right</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>Designates a class which is applied to the jGrowl container and
+			controls it's position on the screen. By Default there are five
+			options available, <EM>top-left, top-right, bottom-left,
+			bottom-right, center</EM>. <STRONG>This must be changed in the
+			defaults before the startup method is called.</STRONG></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>theme</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>default</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>A CSS class designating custom styling for this particular
+			message.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>corners</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>10px</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>If the corners jQuery plugin is include this option specifies
+			the curvature radius to be used for the notifications as they are
+			created.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>check</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>1000</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>The frequency that jGrowl should check for messages to be
+			scrubbed from the screen.<STRONG>This must be changed in the
+			defaults before the startup method is called.</STRONG></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>life</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>3000</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>The lifespan of a non-sticky message on the screen.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>speed</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>normal</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>The animation speed used to open or close a notification.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>easing</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>swing</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>The easing method to be used with the animation for opening and
+			closing a notification.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>closer</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>true</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>Whether or not the close-all button should be used when more
+			then one notification appears on the screen. Optionally this
+			property can be set to a function which will be used as a callback
+			when the close all button is clicked. <STRONG>This must be changed
+			in the defaults before the startup method is called.</STRONG></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>closeTemplate</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>&amp;times;</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>This content is used for the individual notification close
+			links that are added to the corner of a notification. <STRONG>This
+			must be changed in the defaults before the startup method is
+			called.</STRONG></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>closerTemplate</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>&lt;div&gt;[ close all ]&lt;/div&gt;</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>This content is used for the close-all link that is added to
+			the bottom of a jGrowl container when it contains more than one
+			notification. <STRONG>This must be changed in the defaults before
+			the startup method is called.</STRONG></P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>log</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>function(e,m,o) {}</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>Callback to be used before anything is done with the
+			notification. This is intended to be used if the user would like
+			to have some type of logging mechanism for all notifications
+			passed to jGrowl. This callback receives the notification's DOM
+			context, the notifications message and it's option object.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>beforeOpen</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>function(e,m,o) {}</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>Callback to be used before a new notification is opened. This
+			callback receives the notification's DOM context, the
+			notifications message and it's option object.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>open</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>function(e,m,o) {}</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>Callback to be used when a new notification is opened. This
+			callback receives the notification's DOM context, the
+			notifications message and it's option object.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>beforeClose</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>function(e,m,o) {}</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>Callback to be used before a new notification is closed. This
+			callback receives the notification's DOM context, the
+			notifications message and it's option object.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>close</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>function(e,m,o) {}</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>Callback to be used when a new notification is closed. This
+			callback receives the notification's DOM context, the
+			notifications message and it's option object.</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>animateOpen</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>{ opacity: 'show' }</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>The animation properties to use when opening a new notification
+			(default to fadeOut).</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH=112>
+			<P>animateClose</P>
+		</TD>
+		<TD WIDTH=138>
+			<P>{ opacity: 'hide' }</P>
+		</TD>
+		<TD WIDTH=478>
+			<P>The animation properties to use when closing a new notification
+			(defaults to fadeIn).</P>
+		</TD>
+	</TR>
+</TABLE>
+<P><BR><BR>
+</P>
+</BODY>
+</HTML>
