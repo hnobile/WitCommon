@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SchedulableMailers>
+  <SchedulableMailerInfo name="SchedulableMailerExample" baseFolder="P:\WIT-Commons\WitCommon\WIT.Common.AutomaticMailer\src\SchedulableMailerExample\bin\Debug" configFileName="SchedulableMailerExample.dll.config" assemblyName="SchedulableMailerExample" typeName="SchedulableMailerExample.LocalMailer" lastExecution="7/8/2010 12:56:06 PM" executionIntervalMinutes="5" />
+</SchedulableMailers>
