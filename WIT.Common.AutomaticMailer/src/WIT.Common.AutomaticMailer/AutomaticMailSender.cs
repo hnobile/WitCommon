@@ -49,8 +49,11 @@ namespace WIT.Common.AutomaticMailer
                 SchedulableMailerDAOFactory.GetDAO().SaveMailerState(mailer);
                 AppDomain.Unload(d);
             }
-            WaitHandle.WaitAll(mailsSucceded.Values.ToArray());
-            Thread.Sleep(5000);
+            if (mailsSucceded.Count > 0)
+            {
+                WaitHandle.WaitAll(mailsSucceded.Values.ToArray());
+                Thread.Sleep(5000);
+            }
         }
 
         private void QueueMail(MailInfo mailInfo, Guid id)
