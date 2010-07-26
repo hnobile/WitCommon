@@ -7,6 +7,16 @@ namespace WIT.Common.Mailer
     {
         private static IMailService _instance = null;
 
+        public static IMailService NewInstance
+        {
+            get
+            {
+                string typeName = ConfigurationManager.AppSettings[WellKnownKeys.MailService_Implementation.ToString()];
+
+                return ReflectionHelper.ReflectionHelper.GetInstance<IMailService>(typeName);
+            }
+        }
+        
         public static IMailService Instance
         {
             get
