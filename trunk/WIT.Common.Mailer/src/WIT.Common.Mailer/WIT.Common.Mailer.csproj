@@ -36,6 +36,8 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
     <Reference Include="WIT.Common.ReflectionHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\WIT.Common.ReflectionHelper.dll</HintPath>
@@ -47,6 +49,7 @@
     <Compile Include="MockupMailService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MailerException.cs" />
+    <Compile Include="SMTPConnectionInfo.cs" />
     <Compile Include="SMTPMailService.cs" />
     <Compile Include="WellKnownKeys.cs" />
   </ItemGroup>

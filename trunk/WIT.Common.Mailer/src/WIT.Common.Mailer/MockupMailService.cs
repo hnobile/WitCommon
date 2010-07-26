@@ -24,6 +24,10 @@
             
         }
 
+        public void Send(string subject, string body, string toAddress, string fromAddress, string fromName, string[] attachments, SMTPConnectionInfo smtpInfo)
+        {
+        }
+
         #endregion
     }
 }

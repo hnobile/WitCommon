@@ -9,5 +9,6 @@
         void Send(string subject, string body, string toAddress, string[] attachments);
         void Send(string subject, string body, string toAddress, string fromAddress, string fromName);
         void Send(string subject, string body, string toAddress, string fromAddress, string fromName, string[] attachments);
+        void Send(string subject, string body, string toAddress, string fromAddress, string fromName, string[] attachments, SMTPConnectionInfo smtpInfo );
     }
 }
