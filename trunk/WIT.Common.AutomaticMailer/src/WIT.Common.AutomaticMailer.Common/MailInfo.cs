@@ -11,6 +11,8 @@ namespace WIT.Common.AutomaticMailer.Common
         public string Subbject { get; set; }
         public string Body { get; set; }
         public string To { get; set; }
+        public string CC { get; set; }
+        public string BCC { get; set; }
         public string FromName { get; set; }
         public string FromAddress { get; set; }
         public string[] Attachments = new string[] { };
