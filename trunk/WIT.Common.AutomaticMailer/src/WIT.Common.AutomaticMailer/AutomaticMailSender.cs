@@ -74,22 +74,7 @@ namespace WIT.Common.AutomaticMailer
                         " Host: " + mailInfo.SMTPHost);
                     try
                     {
-                        if (!string.IsNullOrEmpty(mailInfo.To))
-                        {
-                            MailServiceProvider.NewInstance.Send(mailInfo.Subbject, mailInfo.Body, mailInfo.To, mailInfo.FromAddress, mailInfo.FromName, mailInfo.Attachments, smtpInfo);
-                        }
-                        if (!string.IsNullOrEmpty(mailInfo.CC))
-                        {
-                            MailServiceProvider.NewInstance.Send(mailInfo.Subbject, mailInfo.Body, mailInfo.CC, mailInfo.FromAddress, mailInfo.FromName, mailInfo.Attachments, smtpInfo);
-                        }
-                        if (!string.IsNullOrEmpty(mailInfo.BCC))
-                        {
-                            string[] bccs = mailInfo.BCC.Trim().Replace(" ", "").Split(',');
-                            foreach (string bcc in bccs)
-                            {
-                                MailServiceProvider.NewInstance.Send(mailInfo.Subbject, mailInfo.Body, bcc, mailInfo.FromAddress, mailInfo.FromName, mailInfo.Attachments, smtpInfo);
-                            }
-                        }
+                        MailServiceProvider.NewInstance.Send(mailInfo.Subbject, mailInfo.Body, mailInfo.To, mailInfo.CC, mailInfo.BCC, mailInfo.FromAddress, mailInfo.FromName, mailInfo.Attachments, smtpInfo);
                     }
                     catch (Exception ex)
                     {
@@ -114,7 +99,7 @@ namespace WIT.Common.AutomaticMailer
                 " Host: " + mailInfo.SMTPHost);
             try
             {
-                MailServiceProvider.NewInstance.Send(mailInfo.Subbject, mailInfo.Body, mailInfo.To, mailInfo.FromAddress, mailInfo.FromName,
+                MailServiceProvider.NewInstance.Send(mailInfo.Subbject, mailInfo.Body, mailInfo.To, mailInfo.CC, mailInfo.BCC, mailInfo.FromAddress, mailInfo.FromName,
                     mailInfo.Attachments, smtpInfo);
             }
             catch (Exception ex)
