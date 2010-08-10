@@ -78,11 +78,11 @@ namespace WIT.Common.Mailer
                 info.SMTPPassword = ServerPassword = ConfigurationManager.AppSettings[WellKnownKeys.MailService_ServerPassword.ToString()];
             }
 
-            Send(subject, body, toAddress, fromAddress, fromName, attachments, info);
+            Send(subject, body, toAddress, "", "", fromAddress, fromName, attachments, info);
 
         }
 
-        public void Send(string subject, string body, string toAddress, string fromAddress, string fromName, string[] attachments, SMTPConnectionInfo info)
+        public void Send(string subject, string body, string toAddress, string cc, string bcc, string fromAddress, string fromName, string[] attachments, SMTPConnectionInfo info)
         {
             MailMessage message = null;
 
@@ -95,6 +95,17 @@ namespace WIT.Common.Mailer
                 MailAddress from = new MailAddress(fromAddress, fromName);
                 MailAddress to = new MailAddress(toAddress);
                 message = new MailMessage(from, to);
+
+                if (!string.IsNullOrEmpty(cc))
+                {
+                    MailAddress toCC = new MailAddress(cc);
+                    message.CC.Add(toCC);
+                }
+                if (!string.IsNullOrEmpty(bcc))
+                {
+                    MailAddress toBCC = new MailAddress(bcc);
+                    message.Bcc.Add(toBCC);
+                }
 
                 message.BodyEncoding = System.Text.Encoding.UTF8;
                 message.Body = body;
