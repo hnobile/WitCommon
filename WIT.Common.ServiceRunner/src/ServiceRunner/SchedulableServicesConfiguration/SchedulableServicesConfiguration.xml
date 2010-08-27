@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SchedulableServices>
-  <SchedulableServiceInfo name="SchedulableServiceExample" baseFolder="C:\devel\proyectos\WIT.Common\WIT.Common.ServiceRunner\src\SchedulableServiceExample\SchedulableServiceExample\bin\Debug" configFileName="SchedulableServiceExample.dll.config" assemblyName="SchedulableServiceExample" typeName="SchedulableServiceExample.FileWriterExample" lastExecution="7/24/2009 5:52:16 PM" executionIntervalMinutes="1" />
+  <!--<SchedulableServiceInfo name="SchedulableServiceExample" baseFolder="C:\devel\proyectos\WIT.Common\WIT.Common.ServiceRunner\src\SchedulableServiceExample\SchedulableServiceExample\bin\Debug" configFileName="SchedulableServiceExample.dll.config" assemblyName="SchedulableServiceExample" typeName="SchedulableServiceExample.FileWriterExample" lastExecution="7/24/2009 5:52:16 PM" executionIntervalMinutes="1" />-->
+  <SchedulableServiceInfo name="SchedulableMailer" baseFolder="P:\WIT-Commons\WitCommon\WIT.Common.AutomaticMailer\src\WIT.Common.AutomaticMailer\bin\Release" configFileName="WIT.Common.AutomaticMailer.dll.config" assemblyName="WIT.Common.AutomaticMailer" typeName="WIT.Common.AutomaticMailer.AutomaticMailSender" lastExecution="7/13/2010 10:07:22 AM" executionIntervalMinutes="1" />
 </SchedulableServices>
