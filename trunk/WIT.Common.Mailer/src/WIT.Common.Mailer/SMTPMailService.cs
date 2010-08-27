@@ -103,8 +103,19 @@ namespace WIT.Common.Mailer
                 }
                 if (!string.IsNullOrEmpty(bcc))
                 {
-                    MailAddress toBCC = new MailAddress(bcc);
-                    message.Bcc.Add(toBCC);
+                    MailAddress toBCC = new MailAddress(bcc.Trim());
+                    if (bcc.IndexOf(',') >= 0)
+                    {
+                        string[] splited = bcc.Split(',');
+                        foreach (string bccMail in splited)
+                        {
+                            message.Bcc.Add(new MailAddress(bccMail.Trim()));
+                        }
+                    }
+                    else
+                    {
+                        message.Bcc.Add(toBCC);
+                    }
                 }
 
                 message.BodyEncoding = System.Text.Encoding.UTF8;
