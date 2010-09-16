@@ -23,6 +23,12 @@
 			$this->sslcert = $_sslcert;
 			$this->sslkey = $_sslkey;
 			$this->lc = $_lc;
+			
+			if(!file_exists($this->sslcert) || !fopen($this->sslcert, "r"))
+				die("FAILED TO OPEN CERTIFICATE FILE");
+			if(!file_exists($this->sslkey) || !fopen($this->sslkey, "r"))
+				die("FAILED TO OPEN PRIVATE KEY FILE");
+		
 		}
 
 		public function getSLT($_service, $_username, $_loginSeconds)
