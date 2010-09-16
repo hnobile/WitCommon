@@ -3,11 +3,11 @@ PHP Live@Edu SSO
 
 1- Enable SSO: 
 
-You must request SSO support to Microsoft and you will receive an e-mail containing a link from where you can download the certificate (.pfx), another e-mail containing a code to enter in the previous link and the siteId.
+You must request SSO support from Live@Edu's web interface and you will receive an e-mail containing a link from where you can download the certificate (.pfx), another e-mail containing a code to enter in the previous link and the siteId.
 
 2- Generate Private Key and Certificates:
 
-a- Rename your pfx certificate to cer.pfx and convert your pfx file to a pem certificate using "generate-pem.bat". Alternatively, you can use the folowing command: "openssl pkcs12 -in yourcertificatefile.pfx -out all.pem -nodes", where "yourcertificatefile.pfx" is the name of your certificate file. In any case, when propted for a password press enter leaving the password blank.
+a- Rename your pfx certificate to cer.pfx and convert your pfx file to a pem certificate using "generate-pem.bat". Alternatively, you can use the following command: "openssl pkcs12 -in yourcertificatefile.pfx -out all.pem -nodes", where "yourcertificatefile.pfx" is the name of your certificate file. In any case, when propted for a password press enter leaving the password blank.
 
 b- Copy the resulting file to seperate files, cer.pem and private.pem
 
