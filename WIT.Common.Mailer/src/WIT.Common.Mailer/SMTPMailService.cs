@@ -50,14 +50,15 @@ namespace WIT.Common.Mailer
             {
                 int serverPort = 25;
                 int.TryParse(ConfigurationManager.AppSettings[WellKnownKeys.MailService_ServerPort.ToString()], out serverPort);
-                info.SMTPPort = serverPort;
                 ServerPort = serverPort;
             }
+            info.SMTPPort = ServerPort.Value;
 
             if (ServerHost == null)
             {
-                info.SMTPHost = ServerHost = ConfigurationManager.AppSettings[WellKnownKeys.MailService_ServerHost.ToString()];
+                ServerHost = ConfigurationManager.AppSettings[WellKnownKeys.MailService_ServerHost.ToString()];
             }
+            info.SMTPHost = ServerHost;
 
             if (!UseSSL.HasValue)
             {
@@ -65,18 +66,20 @@ namespace WIT.Common.Mailer
                 bool.TryParse(ConfigurationManager.AppSettings[WellKnownKeys.MailService_UseSSL.ToString()], out useSSL);
 
                 UseSSL = useSSL;
-                info.SMTPUseSSL = useSSL;
             }
+            info.SMTPUseSSL = UseSSL.Value;
 
             if (ServerUsername == null)
             {
-                info.SMTPUser = ServerUsername = ConfigurationManager.AppSettings[WellKnownKeys.MailService_ServerUsername.ToString()];
+                ServerUsername = ConfigurationManager.AppSettings[WellKnownKeys.MailService_ServerUsername.ToString()];
             }
+            info.SMTPUser = ServerUsername;
 
             if (ServerPassword == null)
             {
-                info.SMTPPassword = ServerPassword = ConfigurationManager.AppSettings[WellKnownKeys.MailService_ServerPassword.ToString()];
+                ServerPassword = ConfigurationManager.AppSettings[WellKnownKeys.MailService_ServerPassword.ToString()];
             }
+            info.SMTPPassword = ServerPassword;
 
             Send(subject, body, toAddress, "", "", fromAddress, fromName, attachments, info);
 
