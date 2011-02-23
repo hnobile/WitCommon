@@ -31,49 +31,50 @@ namespace WIT.Common.WebHelper
         private WebHelper() { }
 
         /// <summary>
-        /// Private cache for base URL.
-        /// </summary>
-        private string _BaseURL = null;
-
-        /// <summary>
         /// Returns the base URL of the current web application.
         /// </summary>
         public string BaseURL
         {
             get
             {
-                if (_BaseURL == null)
+                StringBuilder baseURLBuider = new StringBuilder();
+                HttpRequest request = HttpContext.Current.Request;
+
+                string scheme = request.Url.Scheme;
+                int port = request.Url.Port;
+                string applicationPath = request.ApplicationPath;
+
+                baseURLBuider.Append(scheme);
+                baseURLBuider.Append("://");
+                baseURLBuider.Append(request.Url.DnsSafeHost);
+
+                if ((scheme.Equals("http") && port != 80) || (scheme.Equals("https") && port != 443))
                 {
-                    StringBuilder baseURLBuider = new StringBuilder();
-                    HttpRequest request = HttpContext.Current.Request;
-
-                    baseURLBuider.Append(request.Url.Scheme);
-                    baseURLBuider.Append("://");
-                    baseURLBuider.Append(request.Url.DnsSafeHost);
-
-                    int port = request.Url.Port;
-                    if (port != 80)
-                    {
-                        baseURLBuider.Append(":");
-                        baseURLBuider.Append(port);
-                    }
-
-                    string applicationPath = request.ApplicationPath;
-                    baseURLBuider.Append(applicationPath);
-                    if (!applicationPath.Equals("/"))
-                    {
-                        baseURLBuider.Append("/");
-                    }
-
-                    _BaseURL = baseURLBuider.ToString();
+                    baseURLBuider.Append(":");
+                    baseURLBuider.Append(port);
                 }
 
-                return _BaseURL;
+                baseURLBuider.Append(applicationPath);
+                if (!applicationPath.Equals("/"))
+                {
+                    baseURLBuider.Append("/");
+                }
+                
+                return baseURLBuider.ToString();
             }
         }
 
         public string GetFullURL(string appRelativeURL)
         {
+            if (appRelativeURL.StartsWith("~"))
+            {
+                appRelativeURL = appRelativeURL.Remove(0, 1);
+            }
+            if (appRelativeURL.StartsWith("/"))
+            {
+                appRelativeURL = appRelativeURL.Remove(0, 1);
+            }
+
             return BaseURL + appRelativeURL;
         }
     }
