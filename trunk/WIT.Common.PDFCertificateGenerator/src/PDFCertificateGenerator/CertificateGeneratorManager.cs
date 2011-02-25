@@ -10,58 +10,25 @@ namespace WIT.Common.PDFCertificateGenerator
 {
     public class CertificateGeneratorManager
     {
-        private string outputPath;
-        private string templateFile;
-        private string fileName;
-        public CertificateGeneratorManager(string outputPath, string templateFile)
+        private byte[] templateBytes;
+        public CertificateGeneratorManager(byte[] templateBytes)
         {
-            SetParameters(outputPath, templateFile, Guid.NewGuid().ToString());
+            if (templateBytes.Length == 0)
+                throw new ArgumentNullException();
+            
+            this.templateBytes = templateBytes;
         }
 
-        public CertificateGeneratorManager(string outputPath, string templateFile, string fileName)
+        public byte[] Generate(List<CertificateElement> elements)
         {
-            SetParameters(outputPath, templateFile, fileName);
-        }
-
-        private void SetParameters(string outputPath, string templateFile, string fileName)
-        {
-            if (!string.IsNullOrEmpty(fileName))
-            {
-                this.fileName = fileName;
-            }
-            else
-            {
-                throw new ArgumentException();
-            }
-            if (Directory.Exists(outputPath))
-            {
-                this.outputPath = outputPath;
-            }
-            else
-            {
-                throw new DirectoryNotFoundException();
-            }
-
-            if (File.Exists(templateFile))
-            {
-                this.templateFile = templateFile;
-            }
-            else
-            {
-                throw new FileNotFoundException();
-            }
-        }
-
-        public string Generate(List<CertificateElement> elements)
-        {
-            string file = this.outputPath + @"\" + fileName + ".pdf";
-
-            Image i = Image.GetInstance(this.templateFile);
+            Image i = Image.GetInstance(templateBytes);
             float height = i.Height;
             float width = i.Width;
             
             Document d = new Document(new Rectangle(width, height));
-            PdfWriter w = PdfWriter.GetInstance(d, new FileStream(file, FileMode.Create));
+            MemoryStream mStream = new MemoryStream();
+
+            PdfWriter w = PdfWriter.GetInstance(d, mStream);
             d.Open();
             w.Open();
 
@@ -80,10 +47,12 @@ namespace WIT.Common.PDFCertificateGenerator
             
             i.SetAbsolutePosition(0, 0);
             d.Add(i);
-
             d.Close();
 
-            return file;
+            w.Flush();
+            w.Close();
+
+            return mStream.GetBuffer();
         }
     }
 }
