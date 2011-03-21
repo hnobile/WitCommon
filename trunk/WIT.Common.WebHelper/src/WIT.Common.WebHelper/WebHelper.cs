@@ -31,6 +31,28 @@ namespace WIT.Common.WebHelper
         private WebHelper() { }
 
         /// <summary>
+        /// Gets the scheme name for the current request.
+        /// </summary>
+        public string CurrentScheme
+        {
+            get
+            {
+                return HttpContext.Current.Request.Url.Scheme;
+            }
+        }
+
+        /// <summary>
+        /// Gets a value indicting whether the current HTTP Connection uses secure sockets (that is, HTTPS).
+        /// </summary>
+        public bool IsSecureConnection
+        {
+            get
+            {
+                return HttpContext.Current.Request.IsSecureConnection;
+            }
+        }
+
+        /// <summary>
         /// Returns the base URL of the current web application.
         /// </summary>
         public string BaseURL
