@@ -42,6 +42,17 @@ namespace WIT.Common.WebHelper
         }
 
         /// <summary>
+        /// Gets the URL for the current request.
+        /// </summary>
+        public string CurrentRequestURL
+        {
+            get
+            {
+                return HttpContext.Current.Request.Url.ToString();
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicting whether the current HTTP Connection uses secure sockets (that is, HTTPS).
         /// </summary>
         public bool IsSecureConnection
