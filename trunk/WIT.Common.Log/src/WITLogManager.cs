@@ -51,7 +51,7 @@ namespace WIT.Common.Log
             logParams.Add(error);
             logParams.Add(message);
             logParams.Add(ex.StackTrace);
-            logger.ErrorFormat("\n\nCode: {0}\n\nUser: {1}\n\nWebPage: {2}\n\nMessage: {3}\n\nStackTrace: {4}", logParams.ToArray());
+            logger.ErrorFormat("\n\nMessage: {0}\n\nException Message: {1}\n\nStackTrace: {2}",message,ex.Message, ex.StackTrace);
             return error;
         }
         public string LogError(string message, Exception ex, string userName, string webpageName)
