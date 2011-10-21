@@ -42,7 +42,9 @@ namespace WIT.Common.PDFCertificateGenerator
                 {
                     cb.SetFontAndSize(ce.Font, ce.Size);
                     cb.SetColorFill(ce.FillColor);
-                    cb.ShowTextAligned(PdfContentByte.ALIGN_LEFT, ce.Text, ce.X, ce.Y, 0);
+
+                    cb.ShowTextAligned(ce.Align.GetPdfContentTypeAlign(), ce.Text, ce.Align.GetX(ce.X,d.PageSize.Width), ce.Y, 0);
+                    cb.ShowText(ce.Text);
                 }
 
                 cb.EndText();

@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CertificateElement.cs" />
+    <Compile Include="CertificateElementAlign.cs" />
     <Compile Include="CertificateGeneratorManager.cs" />
     <Compile Include="CertificatePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

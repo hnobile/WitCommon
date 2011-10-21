@@ -21,7 +21,22 @@ namespace WIT.Common.PDFCertificateGenerator
 
         public float Y { get; set; }
 
-        public CertificateElement(string text, float x, float y)
+        public CertificateElementAlign.AlignType AlignType
+        {
+            get
+            {
+                return Align.Type;
+            }
+        }
+
+        public CertificateElementAlign Align { get; set; }
+
+        public CertificateElement(string text, float x, float y) : this(text,x,y, CertificateElementAlign.AlignType.ALIGN_LEFT)
+        {
+            
+        }
+
+        public CertificateElement(string text, float x, float y, CertificateElementAlign.AlignType alignType)
         {
             Font = BaseFont.CreateFont(BaseFont.HELVETICA_BOLDOBLIQUE, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
             Size = 30;
@@ -29,6 +44,7 @@ namespace WIT.Common.PDFCertificateGenerator
             Text = text;
             X = x;
             Y = y;
+            Align = new CertificateElementAlign(alignType);
         }
     }
 }
