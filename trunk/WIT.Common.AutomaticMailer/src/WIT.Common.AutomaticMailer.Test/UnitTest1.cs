@@ -64,7 +64,7 @@ namespace WIT.Common.AutomaticMailer.Test
         {
             try
             {
-                AutomaticMailSender sender = new AutomaticMailSender();
+                Sender.AutomaticMailSender sender = new Sender.AutomaticMailSender();
                 sender.Execute();
             }
             catch (Exception ex)

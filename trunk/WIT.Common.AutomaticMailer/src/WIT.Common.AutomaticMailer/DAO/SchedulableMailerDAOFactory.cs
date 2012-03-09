@@ -5,7 +5,7 @@ using System.Text;
 using WIT.Common.AutomaticMailer.Common;
 using System.Configuration;
 
-namespace WIT.Common.AutomaticMailer.DAO
+namespace WIT.Common.AutomaticMailer.Sender.DAO
 {
     public class SchedulableMailerDAOFactory
     {
