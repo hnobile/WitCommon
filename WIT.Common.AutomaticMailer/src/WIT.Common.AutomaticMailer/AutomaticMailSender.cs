@@ -17,51 +17,66 @@ namespace WIT.Common.AutomaticMailer.Sender
 
         public override void Execute()
         {
-            Logger.Logger.LogInfo("Starting the automatic mailer...");
-            //Levanto todos los mailers configurados en el provider correspondiente
-            List<SchedulableMailerInfo> mailers = SchedulableMailerDAOFactory.GetDAO().GetAll();
-            Logger.Logger.LogInfo("Schedulable mailers loaded: " + mailers.Count);
-            
-            //Esta lista es para notificar cuando se envió un mail. El waithandle se queda esperando que todos los items de la lista estén finalizados
-            //Recorro todos los mailers filtrando por los que se deben ejecutar
-            mailers = mailers.Where(m => !m.LastExecution.HasValue || !m.ExecutionInterval.HasValue || ( m.LastExecution.Value.AddMinutes(m.ExecutionInterval.Value) < DateTime.Now )).ToList();
-            foreach (SchedulableMailerInfo mailer in mailers)
+            try
             {
-                Logger.Logger.LogInfo("Running the " + mailer.Name + " mailer");
-                AppDomain d = null;
-                mailer.LastExecution = DateTime.Now;
-                AppDomainSetup ads = new AppDomainSetup();
-                ads.ApplicationBase = mailer.BaseFolder;
-                ads.ConfigurationFile = mailer.ConfigFileName;
-                d = AppDomain.CreateDomain("WIT.AutomaticMailer", null, ads);
-                
-                ISchedulableMailer instance = (ISchedulableMailer)d.CreateInstanceAndUnwrap(mailer.AssemblyName, mailer.TypeName);
-                List<MailInfo> mailList = instance.GetMailingList();
-                Logger.Logger.LogInfo("Trying to send " + mailList.Count + " mails");
+                Logger.Logger.LogInfo("Starting the automatic mailer...");
+                //Levanto todos los mailers configurados en el provider correspondiente
+                List<SchedulableMailerInfo> mailers = SchedulableMailerDAOFactory.GetDAO().GetAll();
+                Logger.Logger.LogInfo("Schedulable mailers loaded: " + mailers.Count);
 
-                foreach(var mailInfo in mailList){
-                    SendMail(mailInfo);
+                //Esta lista es para notificar cuando se envió un mail. El waithandle se queda esperando que todos los items de la lista estén finalizados
+                //Recorro todos los mailers filtrando por los que se deben ejecutar
+                mailers = mailers.Where(m => !m.LastExecution.HasValue || !m.ExecutionInterval.HasValue || (m.LastExecution.Value.AddMinutes(m.ExecutionInterval.Value) < DateTime.Now)).ToList();
+                foreach (SchedulableMailerInfo mailer in mailers)
+                {
+                    try
+                    {
+                        Logger.Logger.LogInfo("Running the " + mailer.Name + " mailer");
+                        AppDomain d = null;
+                        mailer.LastExecution = DateTime.Now;
+                        AppDomainSetup ads = new AppDomainSetup();
+                        ads.ApplicationBase = mailer.BaseFolder;
+                        ads.ConfigurationFile = mailer.ConfigFileName;
+                        d = AppDomain.CreateDomain("WIT.AutomaticMailer", null, ads);
+
+                        ISchedulableMailer instance = (ISchedulableMailer)d.CreateInstanceAndUnwrap(mailer.AssemblyName, mailer.TypeName);
+                        List<MailInfo> mailList = instance.GetMailingList();
+                        Logger.Logger.LogInfo("Trying to send " + mailList.Count + " mails");
+
+                        foreach (var mailInfo in mailList)
+                        {
+                            SendMail(mailInfo);
+                        }
+                        AppDomain.Unload(d);
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Logger.LogError("Error processing the mailer '" + mailer.Name + "'", ex);
+                    }
                 }
-                AppDomain.Unload(d);
+            }
+            catch (Exception ex)
+            {
+                Logger.Logger.LogError("Error executing automatic the automatic mailer'", ex);
             }
         }
 
         private void SendMail(MailInfo mailInfo)
         {
-            SMTPConnectionInfo smtpInfo = new SMTPConnectionInfo();
-            smtpInfo.SMTPHost = mailInfo.SMTPHost;
-            smtpInfo.SMTPPassword = mailInfo.SMTPPassword;
-            smtpInfo.SMTPPort = mailInfo.SMTPPort;
-            smtpInfo.SMTPUser = mailInfo.SMTPUser;
-            smtpInfo.SMTPUseSSL = mailInfo.SMTPUseSSL;
-            Logger.Logger.LogInfo("Trying to send mail \n"
-                + "To: " + mailInfo.To +
-                " CC: " + mailInfo.CC +
-                " BCC: " + mailInfo.BCC +
-                " From: " + mailInfo.FromAddress +
-                " Host: " + mailInfo.SMTPHost);
             try
             {
+                SMTPConnectionInfo smtpInfo = new SMTPConnectionInfo();
+                smtpInfo.SMTPHost = mailInfo.SMTPHost;
+                smtpInfo.SMTPPassword = mailInfo.SMTPPassword;
+                smtpInfo.SMTPPort = mailInfo.SMTPPort;
+                smtpInfo.SMTPUser = mailInfo.SMTPUser;
+                smtpInfo.SMTPUseSSL = mailInfo.SMTPUseSSL;
+                Logger.Logger.LogInfo("Trying to send mail \n"
+                    + "To: " + mailInfo.To +
+                    " CC: " + mailInfo.CC +
+                    " BCC: " + mailInfo.BCC +
+                    " From: " + mailInfo.FromAddress +
+                    " Host: " + mailInfo.SMTPHost);
                 MailServiceProvider.NewInstance.Send(mailInfo.Subbject, mailInfo.Body, mailInfo.To, mailInfo.CC, mailInfo.BCC, mailInfo.FromAddress, mailInfo.FromName, mailInfo.Attachments, smtpInfo);
             }
             catch (Exception ex)
