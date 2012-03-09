@@ -6,7 +6,7 @@ using WIT.Common.AutomaticMailer.Common;
 using System.Xml.Linq;
 using System.Configuration;
 
-namespace WIT.Common.AutomaticMailer.DAO
+namespace WIT.Common.AutomaticMailer.Sender.DAO
 {
     public class LocalXMLSchedulableMailerDAO: ISchedulableMailerDAO
     {
