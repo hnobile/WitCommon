@@ -47,7 +47,9 @@ namespace WIT.Common.AutomaticMailer.Sender
                         {
                             SendMail(mailInfo);
                         }
+                        Logger.Logger.LogInfo("Trying to unload the AppDomain " + d.FriendlyName);
                         AppDomain.Unload(d);
+                        Logger.Logger.LogInfo("The AppDomain was unloaded");
                     }
                     catch (Exception ex)
                     {
