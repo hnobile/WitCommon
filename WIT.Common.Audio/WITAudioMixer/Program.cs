@@ -97,15 +97,17 @@ namespace WITAudioMixer
             {
                 audio1 = new WaveFileReader(audioFile1);
             }
-            catch (Exception) { 
+            catch (Exception ex) { 
                 //If this file cannot be read, gracefuly ignore the error because we are going to ignore the file anyway
+                //Console.WriteLine("EXCEPTION GETTING AUDIO 1" + ex.Message);
             }
             try
             {
                 audio2 = new WaveFileReader(audioFile2);
             }
-            catch (Exception) {
+            catch (Exception ex) {
                 //If this file cannot be read, gracefuly ignore the error because we are going to ignore the file anyway
+                //Console.WriteLine("EXCEPTION GETTING AUDIO 2" + ex.Message);
             }
             // Create mixer.
             var mixer = new WaveMixerStream32();
@@ -150,6 +152,8 @@ namespace WITAudioMixer
                 var tempwav = outputFile;
                 WaveFileWriter.CreateWaveFile(tempwav, new Wave32To16Stream(mixer));
             }
+
+            //Console.WriteLine("AUDIO SAVED");
         }
     }
 }
