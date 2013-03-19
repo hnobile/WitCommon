@@ -17,21 +17,15 @@ namespace WIT.Common.CurrencyConverter
     {
         public float GetCurrencyConversionRate(string currencyCode)
         {
+            //TODO: Replace this path with the real path
             XElement currencies = XElement.Load(@"P:\WIT-Common\WIT.Common.CurrencyConverter\src\WIT.Common.CurrencyConverter\Source\Currencies.xml");
             
             float rate = 0;
-            //IEnumerable<string> search;
-
-            //if (!string.IsNullOrEmpty(currencyCode))
-            
-            var search = from c in currencies.Elements("currency")
-                             where c.Attribute("code").Value == currencyCode
-                             select c.Element("rate").Value;
-            
-
-            if (search.First() != null)
+            if (!string.IsNullOrEmpty(currencyCode))
             {
-                rate = float.Parse(search.First().ToString());
+                rate = float.Parse((from c in currencies.Elements("currency")
+                                    where c.Attribute("code").Value == currencyCode
+                                    select c.Element("rate").Value).First());
             }
 
             return rate;
