@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<currencies>
+  <currency code="ARS">
+    <rate>5.09</rate>
+  </currency>
+  <currency code="USD">
+    <rate>1</rate>
+  </currency>
+</currencies>
