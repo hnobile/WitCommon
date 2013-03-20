@@ -20,7 +20,7 @@ namespace WIT.Common.CurrencyConverter
         {
             XElement currencies = XElement.Load(CurrencyConverterConfiguration.RatesSourceFile);
             
-            float rate = 0;
+            float rate = -1;
             if (!string.IsNullOrEmpty(currencyCode))
             {
                 rate = float.Parse((from c in currencies.Elements("currency")

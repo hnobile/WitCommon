@@ -52,7 +52,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Source\Currencies.xml" />
+    <Content Include="Source\Currencies.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="CurrencyConverter.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

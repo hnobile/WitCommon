@@ -1,10 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
 <currencies>
-  <currency code="ARS">
-    <rate>5.09</rate>
-  </currency>
   <currency code="USD">
     <rate>1</rate>
+  </currency>
+  <currency code="ARS">
+    <rate>5.0970</rate>
+  </currency>
+  <currency code="EUR">
+    <rate>0.7721</rate>
+  </currency>
+  <currency code="MXN">
+    <rate>12.3888</rate>
+  </currency>
+  <currency code="BRL">
+    <rate>1.9827</rate>
+  </currency>
+  <currency code="UYU">
+    <rate>18.8</rate>
+  </currency>
+  <currency code="CLP">
+    <rate>472.5</rate>
+  </currency>
+  <currency code="PEN">
+    <rate>2.595</rate>
+  </currency>
+  <currency code="COP">
+    <rate>1809.7</rate>
   </currency>
 </currencies>
