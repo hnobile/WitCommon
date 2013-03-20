@@ -23,9 +23,13 @@ namespace WIT.Common.CurrencyConverter
             float rate = -1;
             if (!string.IsNullOrEmpty(currencyCode))
             {
-                rate = float.Parse((from c in currencies.Elements("currency")
+                var search = (from c in currencies.Elements("currency")
                                     where c.Attribute("code").Value == currencyCode
-                                    select c.Element("rate").Value).First());
+                                    select c.Element("rate").Value);
+                if (search.Count() > 0)
+                {
+                    rate = float.Parse(search.First());
+                }
             }
 
             return rate;
