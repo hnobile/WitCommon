@@ -54,7 +54,9 @@
   <ItemGroup>
     <Content Include="Source\Currencies.xml" />
     <Content Include="CurrencyConverter.svc" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -67,6 +69,7 @@
       <DependentUpon>CurrencyConverter.svc</DependentUpon>
     </Compile>
     <Compile Include="ICurrencyConverter.cs" />
+    <Compile Include="Logic\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
