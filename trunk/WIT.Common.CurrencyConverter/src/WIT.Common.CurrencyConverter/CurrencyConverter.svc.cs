@@ -8,6 +8,7 @@ using System.Text;
 using System.ServiceModel.Activation;
 //using System.Xml;
 using System.Xml.Linq;
+using WIT.Common.CurrencyConverter.Logic;
 
 namespace WIT.Common.CurrencyConverter
 {
@@ -17,8 +18,7 @@ namespace WIT.Common.CurrencyConverter
     {
         public float GetCurrencyConversionRate(string currencyCode)
         {
-            //TODO: Replace this path with the real path
-            XElement currencies = XElement.Load(@"P:\WIT-Common\WIT.Common.CurrencyConverter\src\WIT.Common.CurrencyConverter\Source\Currencies.xml");
+            XElement currencies = XElement.Load(CurrencyConverterConfiguration.RatesSourceFile);
             
             float rate = 0;
             if (!string.IsNullOrEmpty(currencyCode))
