@@ -16,7 +16,7 @@ namespace WIT.Common.CurrencyConverter
         {
             if (CurrencyConverterClient.client == null)
             {
-                WebChannelFactory<ICurrencyConverter> factory = new WebChannelFactory<ICurrencyConverter>(new WebHttpBinding(), new Uri(ConfigurationManager.AppSettings["ServiceURL"]));
+                WebChannelFactory<ICurrencyConverter> factory = new WebChannelFactory<ICurrencyConverter>(new WebHttpBinding(), new Uri(ConfigurationManager.AppSettings["CurrencyConverterServiceURL"]));
                 CurrencyConverterClient.client = factory.CreateChannel();
             }
             return CurrencyConverterClient.client;
