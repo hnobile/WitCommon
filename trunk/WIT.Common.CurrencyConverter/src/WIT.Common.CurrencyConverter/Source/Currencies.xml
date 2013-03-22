@@ -5,27 +5,30 @@
     <rate>1</rate>
   </currency>
   <currency code="ARS">
-    <rate>5.0970</rate>
+    <rate>5.105</rate>
   </currency>
   <currency code="EUR">
-    <rate>0.7721</rate>
+    <rate>0.7692</rate>
   </currency>
   <currency code="MXN">
-    <rate>12.3888</rate>
+    <rate>12.3658</rate>
   </currency>
   <currency code="BRL">
-    <rate>1.9827</rate>
+    <rate>2.0058</rate>
   </currency>
   <currency code="UYU">
-    <rate>18.8</rate>
+    <rate>18.82</rate>
   </currency>
   <currency code="CLP">
-    <rate>472.5</rate>
+    <rate>472.85</rate>
   </currency>
   <currency code="PEN">
-    <rate>2.595</rate>
+    <rate>2.593</rate>
   </currency>
   <currency code="COP">
-    <rate>1809.7</rate>
+    <rate>1825.6</rate>
+  </currency>
+  <currency code="GBP">
+    <rate>0.6562</rate>
   </currency>
 </currencies>
