@@ -1,3 +1,3 @@
-@C:\windows\Microsoft.NET\Framework\v2.0.50727\InstallUtil.exe	/i WIT.Common.ServiceRunner.exe
+@C:\windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe	/i WIT.Common.ServiceRunner.exe
 
 PAUSE
