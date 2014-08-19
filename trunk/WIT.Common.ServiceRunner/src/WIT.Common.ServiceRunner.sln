@@ -1,12 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WIT.Common.ServiceRunner", "ServiceRunner\WIT.Common.ServiceRunner.csproj", "{684B9F6D-3EC5-4043-A846-0DCA76283BE9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WIT.Common.ServiceRunner.Common", "Common\WIT.Common.ServiceRunner.Common\WIT.Common.ServiceRunner.Common.csproj", "{F54A9885-D59C-41A2-B55F-A1EAB7F8BD23}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WIT.Common.ServiceRunner.Test", "Test\WIT.Common.ServiceRunner.Test\WIT.Common.ServiceRunner.Test.csproj", "{FAC57AE6-36CD-4459-BA76-B784F3082A71}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21D985A2-63C0-4CAC-B5AC-4DFF38EF9BE6}"
 	ProjectSection(SolutionItems) = preProject
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
@@ -14,6 +8,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		WIT.Common.ServiceRunner1.vsmdi = WIT.Common.ServiceRunner1.vsmdi
 		WIT.Common.ServiceRunner2.vsmdi = WIT.Common.ServiceRunner2.vsmdi
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WIT.Common.ServiceRunner", "ServiceRunner\WIT.Common.ServiceRunner.csproj", "{684B9F6D-3EC5-4043-A846-0DCA76283BE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WIT.Common.ServiceRunner.Common", "Common\WIT.Common.ServiceRunner.Common\WIT.Common.ServiceRunner.Common.csproj", "{F54A9885-D59C-41A2-B55F-A1EAB7F8BD23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WIT.Common.ServiceRunner.Test", "Test\WIT.Common.ServiceRunner.Test\WIT.Common.ServiceRunner.Test.csproj", "{FAC57AE6-36CD-4459-BA76-B784F3082A71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchedulableServiceExample", "SchedulableServiceExample\SchedulableServiceExample\SchedulableServiceExample.csproj", "{2BD06E4F-4A40-4420-B1DB-82DD59AC55D3}"
 EndProject
