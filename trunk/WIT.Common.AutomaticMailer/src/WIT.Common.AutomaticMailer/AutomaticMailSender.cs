@@ -8,6 +8,7 @@ using WIT.Common.AutomaticMailer.Sender.DAO;
 using WIT.Common.AutomaticMailer.Common;
 using WIT.Common.Mailer;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace WIT.Common.AutomaticMailer.Sender
 {
@@ -43,10 +44,12 @@ namespace WIT.Common.AutomaticMailer.Sender
                         List<MailInfo> mailList = instance.GetMailingList(lastExecutionTime);
                         Logger.Logger.LogInfo("Trying to send " + mailList.Count + " mails");
 
-                        foreach (var mailInfo in mailList)
-                        {
-                            SendMail(mailInfo);
-                        }
+                        Parallel.ForEach<MailInfo>(mailList, new ParallelOptions { MaxDegreeOfParallelism = 5 }, mailInfo => { SendMail(mailInfo); });
+                        
+                        //foreach (var mailInfo in mailList)
+                        //{
+                        //    SendMail(mailInfo);
+                        //}
                         Logger.Logger.LogInfo("Trying to unload the AppDomain " + d.FriendlyName);
                         AppDomain.Unload(d);
                         Logger.Logger.LogInfo("The AppDomain was unloaded");
@@ -73,11 +76,11 @@ namespace WIT.Common.AutomaticMailer.Sender
                 smtpInfo.SMTPPort = mailInfo.SMTPPort;
                 smtpInfo.SMTPUser = mailInfo.SMTPUser;
                 smtpInfo.SMTPUseSSL = mailInfo.SMTPUseSSL;
-                MailServiceProvider.NewInstance.Send(mailInfo.Subbject, mailInfo.Body, mailInfo.To, mailInfo.CC, mailInfo.BCC, mailInfo.FromAddress, mailInfo.FromName, mailInfo.Attachments, smtpInfo);
+                MailServiceProvider.Instance.Send(mailInfo.Subbject, mailInfo.Body, mailInfo.To, mailInfo.CC, mailInfo.BCC, mailInfo.FromAddress, mailInfo.FromName, mailInfo.Attachments, smtpInfo);
             }
             catch (Exception ex)
             {
-                Logger.Logger.LogError("Error sending mail: ", ex);
+                Logger.Logger.LogInfo("Error sending mail:\n" + ex.Message + "\nStackTrace:\n" + ex.StackTrace + "\n\n");
             }
         }
     }
