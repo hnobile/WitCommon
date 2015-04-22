@@ -15,7 +15,7 @@ namespace WIT.Common.AutomaticMailer.Sender
     {
         private Dictionary<Guid, AutoResetEvent> mailsSucceded = new Dictionary<Guid, AutoResetEvent>();
 
-        public override void Execute()
+        public override void Execute(DateTime? lastExecutionTime)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace WIT.Common.AutomaticMailer.Sender
                         d = AppDomain.CreateDomain("WIT.AutomaticMailer", null, ads);
 
                         ISchedulableMailer instance = (ISchedulableMailer)d.CreateInstanceAndUnwrap(mailer.AssemblyName, mailer.TypeName);
-                        List<MailInfo> mailList = instance.GetMailingList();
+                        List<MailInfo> mailList = instance.GetMailingList(lastExecutionTime);
                         Logger.Logger.LogInfo("Trying to send " + mailList.Count + " mails");
 
                         foreach (var mailInfo in mailList)
@@ -73,17 +73,11 @@ namespace WIT.Common.AutomaticMailer.Sender
                 smtpInfo.SMTPPort = mailInfo.SMTPPort;
                 smtpInfo.SMTPUser = mailInfo.SMTPUser;
                 smtpInfo.SMTPUseSSL = mailInfo.SMTPUseSSL;
-                Logger.Logger.LogInfo("Trying to send mail \n"
-                    + "To: " + mailInfo.To +
-                    " CC: " + mailInfo.CC +
-                    " BCC: " + mailInfo.BCC +
-                    " From: " + mailInfo.FromAddress +
-                    " Host: " + mailInfo.SMTPHost);
                 MailServiceProvider.NewInstance.Send(mailInfo.Subbject, mailInfo.Body, mailInfo.To, mailInfo.CC, mailInfo.BCC, mailInfo.FromAddress, mailInfo.FromName, mailInfo.Attachments, smtpInfo);
             }
             catch (Exception ex)
             {
-                Logger.Logger.LogError("Error sending mail: " + ex.Message, ex);
+                Logger.Logger.LogError("Error sending mail: ", ex);
             }
         }
     }

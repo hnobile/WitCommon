@@ -10,7 +10,7 @@ namespace SchedulableServiceExample
     {
         #region ISchedulableService Members
 
-        public override void Execute()
+        public override void Execute(DateTime? lastExecution)
         {
             TextWriter tw = new StreamWriter("C:\\Test.txt");
 

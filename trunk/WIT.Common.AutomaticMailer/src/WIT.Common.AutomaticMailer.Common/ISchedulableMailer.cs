@@ -7,6 +7,6 @@ namespace WIT.Common.AutomaticMailer.Common
 {
     public interface ISchedulableMailer
     {
-        List<MailInfo> GetMailingList();
+        List<MailInfo> GetMailingList(DateTime? lastExecutionTime);
     }
 }

@@ -28,6 +28,7 @@ namespace WIT.Common.ServiceRunner
                     AppDomain d = null;
                     try
                     {
+                        DateTime? lastExecution = s.LastExecution;
                         s.LastExecution = DateTime.Now;
                         AppDomainSetup ads = new AppDomainSetup();
                         ads.ApplicationBase = s.BaseFolder;
@@ -35,7 +36,7 @@ namespace WIT.Common.ServiceRunner
                         d = AppDomain.CreateDomain("WIT.ServiceRunner", null, ads);
                         ISchedulableService instance = (ISchedulableService)d.CreateInstanceAndUnwrap(
                             s.AssemblyName, s.TypeName);
-                        instance.Execute();
+                        instance.Execute(lastExecution);
                         ServiceLog(s);
                        
                         WITLogManager.GetInstance(WellKnownKeys.DefaultLoggerName).LogInfo("Finished to process service with name " + s.Name);

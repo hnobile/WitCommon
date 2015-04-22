@@ -11,7 +11,7 @@ namespace WIT.Common.AutomaticMailer.SelfRunner
         static void Main(string[] args)
         {
             AutomaticMailSender s = new AutomaticMailSender();
-            s.Execute();
+            s.Execute(null);
         }
     }
 }

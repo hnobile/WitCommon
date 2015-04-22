@@ -11,7 +11,7 @@ namespace WIT.Common.AutomaticMailer.Common
 
         #region ISchedulableMailer Members
 
-        public abstract List<MailInfo> GetMailingList();
+        public abstract List<MailInfo> GetMailingList(DateTime? lastExecutionTime);
 
         #endregion
     }

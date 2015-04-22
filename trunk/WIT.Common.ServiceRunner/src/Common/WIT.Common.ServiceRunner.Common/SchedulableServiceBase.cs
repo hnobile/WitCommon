@@ -6,7 +6,7 @@ namespace WIT.Common.ServiceRunner.Common
     {
         #region ISchedulableService Members
 
-        public abstract void Execute();
+        public abstract void Execute(DateTime? lastExecution);
 
         #endregion
     }
