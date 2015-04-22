@@ -11,7 +11,7 @@ namespace SchedulableMailerExample
     public class LocalMailer : SchadulableMailerBase
     {
 
-        public override List<MailInfo> GetMailingList()
+        public override List<MailInfo> GetMailingList(DateTime? lastExecutionTime)
         {
 
             List<MailInfo> mails = new List<MailInfo>();
