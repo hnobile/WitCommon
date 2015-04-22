@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<SchedulableMailers>
-  <SchedulableMailerInfo name="SchedulableMailerExample" baseFolder="P:\WIT-Common\WIT.Common.AutomaticMailer\src\SchedulableMailerExample\bin\Debug" configFileName="SchedulableMailerExample.dll.config" assemblyName="SchedulableMailerExample" typeName="SchedulableMailerExample.LocalMailer" lastExecution="" executionIntervalMinutes="5" />
-  <!--<SchedulableMailerInfo name="WWC-ExpiredSubscriptions" baseFolder="P:\WIT-Backend\src\WimitPortal.Services\WimitPortal.Services.Mailers\bin\Debug" configFileName="WimitPortal.Services.Mailers.dll.config" assemblyName="WimitPortal.Services.Mailers" typeName="WimitPortal.Services.Mailers.ExpiredSubscriptionsMailer" lastExecution="" executionIntervalMinutes="5" />-->
-  <!--<SchedulableMailerInfo name="WWC-NewSubscriptionReminder" baseFolder="P:\WIT-Backend\src\WimitPortal.Services\WimitPortal.Services.Mailers\bin\Debug" configFileName="WimitPortal.Services.Mailers.dll.config" assemblyName="WimitPortal.Services.Mailers" typeName="WimitPortal.Services.Mailers.NewSubscriptionReminder" lastExecution="" executionIntervalMinutes="5" />-->
-</SchedulableMailers>
