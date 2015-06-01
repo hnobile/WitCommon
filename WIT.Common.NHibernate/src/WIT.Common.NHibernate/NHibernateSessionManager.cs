@@ -11,7 +11,7 @@ using System.Runtime.Remoting.Messaging;
 namespace WIT.Common.NHibernate
 {
     /// <summary>
-    /// Handles creation and management of sessions and transactions.  It is a singleton because 
+    /// Handles creation and management of sessions and transactions. It is a singleton because 
     /// building the initial session factory is very expensive. Inspiration for this class came 
     /// from Chapter 8 of Hibernate in Action by Bauer and King.
     /// </summary>
@@ -37,16 +37,6 @@ namespace WIT.Common.NHibernate
         private NHibernateSessionManager()
         {
             InitSessionFactory();
-        }
-
-        /// <summary>
-        /// Assists with ensuring thread-safe, lazy singleton
-        /// </summary>
-        private class Nested
-        {
-            static Nested() { }
-            internal static readonly NHibernateSessionManager NHibernateSessionManager =
-                new NHibernateSessionManager();
         }
 
         #endregion
