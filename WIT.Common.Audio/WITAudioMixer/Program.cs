@@ -14,6 +14,7 @@ namespace WITAudioMixer
         {
             try
             {
+				//asdasdasdasd
                 ConsoleArgumentsParser parameters = new ConsoleArgumentsParser(args);
 
                 string action = String.Empty,

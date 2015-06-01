@@ -20,7 +20,7 @@ namespace WIT.Common.Mailer
         }
 
         /// <summary>
-        /// Constructor parameterized with a message.
+        /// Constructor parameterized with a message. 
         /// </summary>
         /// <param name="message">Message for creating the exception.</param>
         public MailerException(string message)
