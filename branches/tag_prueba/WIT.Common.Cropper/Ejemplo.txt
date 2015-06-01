@@ -1,0 +1,5 @@
+El archivo cropImage.aspx es un ejemplo de cómo se puede usar el script. En el HTML, están los includes de los archivos.
+
+La URL del "proyecto" es:
+
+http://www.defusion.org.uk/code/javascript-image-cropper-ui-using-prototype-scriptaculous/
