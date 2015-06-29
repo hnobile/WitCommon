@@ -14,11 +14,15 @@ namespace WIT.Common.ServiceRunner
         /// </summary>
         static void Main()
         {
+			//Creo una lista de Servicios a correr
             ServiceBase[] ServicesToRun;
+			//Instancio la lista
             ServicesToRun = new ServiceBase[] 
 			{ 
+				//Con una instancia de un Service Manager de Windows
 				new WinServiceManager() 
 			};
+			//Pongo a correr los servicios de la lista
             ServiceBase.Run(ServicesToRun);
         }
     }
