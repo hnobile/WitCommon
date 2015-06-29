@@ -22,7 +22,7 @@ namespace WIT.Common.ServiceRunner
 				//Con una instancia de un Service Manager de Windows
 				new WinServiceManager() 
 			};
-			//Pongo a correr los servicios de la lista
+			//Pongo a correr los servicios
             ServiceBase.Run(ServicesToRun);
         }
     }
