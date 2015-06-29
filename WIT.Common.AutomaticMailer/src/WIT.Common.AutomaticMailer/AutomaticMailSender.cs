@@ -33,23 +33,22 @@ namespace WIT.Common.AutomaticMailer.Sender
                     try
                     {
                         Logger.Logger.LogInfo("Running the " + mailer.Name + " mailer");
-                        AppDomain d = null;
+                        //This will run on a new app domain.
+						AppDomain d = null;
                         mailer.LastExecution = DateTime.Now;
                         AppDomainSetup ads = new AppDomainSetup();
                         ads.ApplicationBase = mailer.BaseFolder;
                         ads.ConfigurationFile = mailer.ConfigFileName;
-                        d = AppDomain.CreateDomain("WIT.AutomaticMailer", null, ads);
+                        //I don't know if two domains can have the same name.
+						d = AppDomain.CreateDomain("WIT.AutomaticMailer", null, ads);
 
                         ISchedulableMailer instance = (ISchedulableMailer)d.CreateInstanceAndUnwrap(mailer.AssemblyName, mailer.TypeName);
                         List<MailInfo> mailList = instance.GetMailingList(lastExecutionTime);
                         Logger.Logger.LogInfo("Trying to send " + mailList.Count + " mails");
 
+						//Every mail will be sent on a new thread.
                         Parallel.ForEach<MailInfo>(mailList, new ParallelOptions { MaxDegreeOfParallelism = 5 }, mailInfo => { SendMail(mailInfo); });
                         
-                        //foreach (var mailInfo in mailList)
-                        //{
-                        //    SendMail(mailInfo);
-                        //}
                         Logger.Logger.LogInfo("Trying to unload the AppDomain " + d.FriendlyName);
                         AppDomain.Unload(d);
                         Logger.Logger.LogInfo("The AppDomain was unloaded");
@@ -70,6 +69,7 @@ namespace WIT.Common.AutomaticMailer.Sender
         {
             try
             {
+				//Generate the info to send
                 SMTPConnectionInfo smtpInfo = new SMTPConnectionInfo();
                 smtpInfo.SMTPHost = mailInfo.SMTPHost;
                 smtpInfo.SMTPPassword = mailInfo.SMTPPassword;
